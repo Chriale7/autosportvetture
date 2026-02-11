@@ -96,9 +96,23 @@ let filteredCars = [...carsDatabase];
 
 // Inizializzazione
 document.addEventListener('DOMContentLoaded', function() {
-    displayCars(carsDatabase);
+    loadCarsFromStorage();
     setupSmoothScroll();
 });
+
+// Carica auto dal localStorage (aggiunte dal pannello admin)
+function loadCarsFromStorage() {
+    const storedCars = localStorage.getItem('autosport_cars');
+    if (storedCars) {
+        const cars = JSON.parse(storedCars);
+        if (cars.length > 0) {
+            displayCars(cars);
+            return;
+        }
+    }
+    // Se non ci sono auto salvate, mostra quelle di esempio
+    displayCars(carsDatabase);
+}
 
 // Display auto
 function displayCars(cars) {
@@ -114,10 +128,16 @@ function displayCars(cars) {
         return;
     }
     
-    grid.innerHTML = cars.map(car => `
+    grid.innerHTML = cars.map(car => {
+        // Usa foto caricate se disponibili, altrimenti emoji
+        const imageHtml = car.photos && car.photos.length > 0 
+            ? `<img src="${car.photos[0]}" style="width: 100%; height: 100%; object-fit: cover;">`
+            : `<span style="font-size: 60px;">${car.emoji || '🚗'}</span>`;
+            
+        return `
         <div class="car-card">
             <div class="car-image">
-                <span style="font-size: 60px;">${car.emoji}</span>
+                ${imageHtml}
                 ${car.garantita ? '<div class="car-badge">✓ Garantita</div>' : ''}
             </div>
             <div class="car-info">
@@ -153,7 +173,7 @@ function displayCars(cars) {
                 </div>
             </div>
         </div>
-    `).join('');
+    `}).join('');
 }
 
 // Filtra auto
@@ -163,9 +183,13 @@ function filterCars() {
     const carburante = document.getElementById('filterCarburante').value.toLowerCase();
     const anno = document.getElementById('filterAnno').value;
     
-    filteredCars = carsDatabase.filter(car => {
+    // Usa le auto dal localStorage se disponibili
+    const storedCars = localStorage.getItem('autosport_cars');
+    const allCars = storedCars ? JSON.parse(storedCars) : carsDatabase;
+    
+    filteredCars = allCars.filter(car => {
         return (
-            (!marca || car.marca === marca) &&
+            (!marca || car.marca === marca || car.marca.toLowerCase() === marca) &&
             (!tipo || car.tipo === tipo) &&
             (!carburante || car.carburante === carburante) &&
             (!anno || car.anno.toString() === anno)
@@ -187,12 +211,12 @@ function filterCars() {
 // Contatto per auto specifica
 function contactAboutCar(carName) {
     const message = `Sono interessato/a all'auto: ${carName}`;
-    const whatsappUrl = `https://wa.me/393341234567?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/393400024151?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }
 
 function callAboutCar(carName) {
-    window.location.href = 'tel:+393341234567';
+    window.location.href = 'tel:+390399686292';
 }
 
 // Form valutazione
@@ -340,12 +364,10 @@ function validateEmail(email) {
 }
 
 // Console welcome message
-console.log('%c🚗 AutoPro - Sito Web Rivendita Auto', 
+console.log('%c🚗 Autosport - Rivendita Auto Robbiate', 
     'font-size: 20px; font-weight: bold; color: #2563eb;');
 console.log('%cSito creato con HTML, CSS e JavaScript vanilla', 
     'font-size: 14px; color: #6b7280;');
-console.log('%cPer personalizzare il sito, modifica i file index.html, style.css e script.js', 
-    'font-size: 12px; color: #10b981;');
 
 // Aggiungi effetto parallax leggero all'hero (opzionale)
 window.addEventListener('scroll', () => {
