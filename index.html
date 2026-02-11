@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rivendita Auto Nuove e Usate - Auto certificate con garanzia. Valutazione e ritiro del tuo usato.">
-    <title>AutoPro - Rivendita Auto Nuove e Usate</title>
+    <meta name="description" content="Autosport - Rivendita Auto Nuove e Usate a Robbiate (LC). Auto certificate con garanzia. Valutazione e ritiro del tuo usato.">
+    <title>Autosport - Rivendita Auto Nuove e Usate | Robbiate (LC)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,11 +13,14 @@
         <div class="top-bar">
             <div class="container">
                 <div class="contact-info">
-                    <a href="mailto:info@autopro.it" class="contact-item">
-                        <span>✉️</span> info@autopro.it
+                    <a href="mailto:autosportvetture@gmail.com" class="contact-item">
+                        <span>✉️</span> autosportvetture@gmail.com
                     </a>
-                    <a href="tel:+393341234567" class="contact-item">
-                        <span>📞</span> 334 123 4567
+                    <a href="tel:+390399686292" class="contact-item">
+                        <span>📞</span> 039 968 6292
+                    </a>
+                    <a href="tel:+393400024151" class="contact-item">
+                        <span>📱</span> 340 002 4151
                     </a>
                 </div>
             </div>
@@ -26,8 +29,7 @@
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <h1>🚗 AutoPro</h1>
-                    <p>La tua auto dei sogni</p>
+                    <img src="logo.png" alt="Autosport" style="height: 60px;">
                 </div>
                 
                 <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -63,9 +65,22 @@
                             <select id="filterMarca">
                                 <option value="">Tutte le marche</option>
                                 <option value="audi">Audi</option>
+                                <option value="bmw">BMW</option>
                                 <option value="fiat">Fiat</option>
+                                <option value="ford">Ford</option>
                                 <option value="mercedes">Mercedes</option>
                                 <option value="volkswagen">Volkswagen</option>
+                            </select>
+                        </div>
+                        
+                        <div class="search-field">
+                            <label>Tipo Auto</label>
+                            <select id="filterTipo">
+                                <option value="">Tutti i tipi</option>
+                                <option value="berlina">Berlina</option>
+                                <option value="suv">SUV</option>
+                                <option value="citycar">City Car</option>
+                                <option value="station">Station Wagon</option>
                             </select>
                         </div>
                         
@@ -124,12 +139,12 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>Benvenuti da AutoPro</h2>
-                    <h3>NELLA BOTTE PICCOLA C'È IL BUON VINO!</h3>
+                    <h2>Benvenuti da Autosport</h2>
+                    <h3>LA TUA RIVENDITA DI FIDUCIA A ROBBIATE!</h3>
                     <p>
-                        La nostra azienda a gestione familiare è nata nel 1995 con l'obiettivo di offrire 
-                        un servizio di qualità nel settore delle auto usate. Da oltre 25 anni serviamo i nostri 
-                        clienti con professionalità, trasparenza e passione.
+                        Autosport è la tua rivendita di auto nuove e usate a Robbiate (LC). 
+                        Offriamo un servizio di qualità nel settore automotive con professionalità, 
+                        trasparenza e passione per le auto.
                     </p>
                     <p>
                         Ogni auto viene attentamente selezionata, controllata e certificata prima della vendita. 
@@ -375,22 +390,30 @@
             
             <div class="contact-content">
                 <div class="contact-info-box">
-                    <h3>AUTOSPORT</h3>
+                    <h3>Autosport</h3>
                     <div class="contact-detail">
                         <strong>📍 Indirizzo:</strong>
-                        <p>Via Graziano Oltolini, 23 (LC)</p>
+                        <p>Via Graziano Oltolini 23<br>23899 Robbiate (LC)</p>
                     </div>
                     <div class="contact-detail">
                         <strong>📞 Telefono:</strong>
-                        <p><a href="tel:+39 039 9686292">340 002 4151</a></p>
+                        <p><a href="tel:+390399686292">039 968 6292</a></p>
+                    </div>
+                    <div class="contact-detail">
+                        <strong>📱 Cellulare/WhatsApp:</strong>
+                        <p><a href="tel:+393400024151">340 002 4151</a></p>
                     </div>
                     <div class="contact-detail">
                         <strong>✉️ Email:</strong>
-                        <p><a href="autosportvetture@gmail.com"</a></p>
+                        <p><a href="mailto:autosportvetture@gmail.com">autosportvetture@gmail.com</a></p>
                     </div>
                     <div class="contact-detail">
                         <strong>🕐 Orari:</strong>
-                        <p>Lun-Sab: SOLO SU APPUNTAMENTO</p>
+                        <p><strong>Lunedì - Sabato:</strong><br>
+                        SOLO SU APPUNTAMENTO</p>
+                        <p style="margin-top: 10px; font-size: 0.9em; color: #f59e0b;">
+                            📞 Chiamaci per fissare un appuntamento
+                        </p>
                     </div>
                 </div>
                 
@@ -423,11 +446,13 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
-                    <h4>AUTOSPORT</h4>
-                    <p>La tua rivendita di fiducia</p>
+                    <h4>Autosport</h4>
+                    <p>La tua rivendita di fiducia a Robbiate</p>
                     <p style="margin-top: 10px;">
-                        📍 Via Graziano Oltolini 23, Robbiate<br>
-                        📞 039 9686 292<br>
+                        📍 Via Graziano Oltolini 23<br>
+                        23899 Robbiate (LC)<br><br>
+                        📞 039 968 6292<br>
+                        📱 340 002 4151<br>
                         ✉️ autosportvetture@gmail.com
                     </p>
                 </div>
@@ -447,26 +472,32 @@
                     <h4>Orari Apertura</h4>
                     <p>
                         <strong>Lunedì - Sabato:</strong><br>
-                        SOLO SU APPUNTAMENTO<br>
+                        SOLO SU APPUNTAMENTO<br><br>
+                        <strong>Domenica:</strong><br>
+                        Chiusi<br><br>
+                        📞 Chiamaci per fissare<br>
+                        un appuntamento
+                    </p>
                 </div>
                 
                 <div class="footer-col">
                     <h4>Seguici</h4>
                     <div class="social-links">
-                        <a href="#" class="social-link"></a>
-                        <a href="#" class="social-link">WhatsApp</a>
+                        <a href="https://www.instagram.com/autosport.vetture" target="_blank" class="social-link">📸 Instagram</a>
+                        <a href="https://wa.me/393400024151" target="_blank" class="social-link">💬 WhatsApp</a>
+                        <a href="tel:+390399686292" class="social-link">📞 Chiamaci</a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 AUTOSPORT - Tutti i diritti riservati | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a></p>
+                <p>&copy; 2024 Autosport Robbiate - Tutti i diritti riservati | <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a></p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Button -->
-    <a href="https://wa.me/3400024151" class="whatsapp-btn" target="_blank">
+    <a href="https://wa.me/393400024151" class="whatsapp-btn" target="_blank" title="Contattaci su WhatsApp">
         <span class="whatsapp-icon">💬</span>
     </a>
 
