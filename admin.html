@@ -3,846 +3,465 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pannello Amministratore - Autosport</title>
+    <title>Pannello Admin - Autosport</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .admin-body {
+            background: #f3f4f6;
+            min-height: 100vh;
         }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
-        }
-
+        
         .admin-header {
-            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+            background: #1f2937;
             color: white;
             padding: 20px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
+        
         .admin-header .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .admin-header h1 {
-            font-size: 1.8em;
+        
+        .admin-title {
+            font-size: 1.5em;
+            margin: 0;
         }
-
-        .btn-view-site {
-            background: white;
-            color: #2563eb;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-view-site:hover {
-            background: #f3f4f6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        .admin-tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .tab {
-            padding: 12px 25px;
-            background: #f3f4f6;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .tab.active {
-            background: #2563eb;
-            color: white;
-        }
-
-        .tab:hover {
-            background: #e5e7eb;
-        }
-
-        .tab.active:hover {
-            background: #1e40af;
-        }
-
-        .tab-content {
-            display: none;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-section {
-            margin-bottom: 30px;
-        }
-
-        .form-section h3 {
-            color: #1f2937;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e5e7eb;
-            font-size: 1.3em;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #374151;
-        }
-
-        .form-group label .required {
-            color: #ef4444;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 1em;
-            font-family: inherit;
-            transition: all 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .upload-area {
-            border: 3px dashed #d1d5db;
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            background: #f9fafb;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .upload-area:hover {
-            border-color: #2563eb;
-            background: #eff6ff;
-        }
-
-        .upload-area.dragover {
-            border-color: #2563eb;
-            background: #dbeafe;
-        }
-
-        .upload-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-
-        .upload-text {
-            color: #6b7280;
-            font-size: 1.1em;
-        }
-
-        .upload-hint {
-            color: #9ca3af;
-            font-size: 0.9em;
-            margin-top: 10px;
-        }
-
-        .preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .preview-item {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid #e5e7eb;
-        }
-
-        .preview-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .preview-remove {
-            position: absolute;
-            top: 5px;
-            right: 5px;
+        
+        .logout-btn {
             background: #ef4444;
             color: white;
+            padding: 10px 20px;
             border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
+            text-decoration: none;
         }
-
-        .preview-remove:hover {
+        
+        .logout-btn:hover {
             background: #dc2626;
-            transform: scale(1.1);
         }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
+        
+        .admin-container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
+        
+        .admin-actions {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-
-        .btn-primary {
-            background: #2563eb;
+        
+        .add-car-btn {
+            background: #10b981;
             color: white;
-            padding: 15px 40px;
+            padding: 15px 30px;
             border: none;
             border-radius: 8px;
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 10px;
         }
-
-        .btn-primary:hover {
-            background: #1e40af;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        
+        .add-car-btn:hover {
+            background: #059669;
         }
-
-        .btn-secondary {
-            background: #6b7280;
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-left: 10px;
+        
+        .cars-list {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-
-        .btn-secondary:hover {
-            background: #4b5563;
-        }
-
-        .form-actions {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 2px solid #e5e7eb;
-            text-align: center;
-        }
-
-        /* Car List Styles */
-        .car-list {
-            display: grid;
-            gap: 20px;
-        }
-
+        
         .car-item {
             display: grid;
-            grid-template-columns: 200px 1fr auto;
+            grid-template-columns: 100px 1fr auto;
             gap: 20px;
             padding: 20px;
-            background: #f9fafb;
-            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 15px;
             align-items: center;
-            transition: all 0.3s;
         }
-
+        
         .car-item:hover {
-            background: #f3f4f6;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            background: #f9fafb;
         }
-
-        .car-item-image {
-            width: 200px;
-            height: 150px;
+        
+        .car-thumb {
+            width: 100px;
+            height: 70px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3em;
+            font-size: 2em;
         }
-
-        .car-item-info h4 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
+        
+        .car-details h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.2em;
             color: #1f2937;
         }
-
-        .car-item-specs {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .car-item-spec {
-            font-size: 0.9em;
+        
+        .car-details p {
+            margin: 0;
             color: #6b7280;
+            font-size: 0.9em;
         }
-
-        .car-item-spec strong {
-            color: #374151;
-        }
-
-        .car-item-price {
-            font-size: 1.8em;
-            font-weight: bold;
+        
+        .car-price {
             color: #2563eb;
-            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-top: 5px;
         }
-
-        .car-item-actions {
+        
+        .car-actions {
             display: flex;
-            flex-direction: column;
             gap: 10px;
         }
-
+        
         .btn-edit {
-            padding: 10px 20px;
-            background: #2563eb;
+            background: #3b82f6;
             color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-edit:hover {
-            background: #1e40af;
-        }
-
-        .btn-delete {
             padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-edit:hover {
+            background: #2563eb;
+        }
+        
+        .btn-delete {
             background: #ef4444;
             color: white;
+            padding: 10px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
         }
-
+        
         .btn-delete:hover {
             background: #dc2626;
         }
-
-        .empty-state {
-            text-align: center;
-            padding: 80px 20px;
-            color: #9ca3af;
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            overflow-y: auto;
         }
-
-        .empty-state-icon {
-            font-size: 5em;
-            margin-bottom: 20px;
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
-
-        .empty-state h3 {
-            font-size: 1.5em;
-            margin-bottom: 10px;
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #1f2937;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
             color: #6b7280;
         }
-
-        .success-message {
-            background: #d1fae5;
-            border-left: 4px solid #10b981;
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
+        
+        .close-modal:hover {
+            color: #1f2937;
         }
-
-        .success-message.show {
-            display: block;
-            animation: slideDown 0.3s;
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .form-grid .form-group {
+            margin-bottom: 0;
         }
-
-        @media (max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .car-item {
-                grid-template-columns: 1fr;
-            }
-
-            .car-item-image {
-                width: 100%;
-            }
-
-            .admin-tabs {
-                flex-direction: column;
-            }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1f2937;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2563eb;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            margin-top: 5px;
         }
     </style>
 </head>
-<body>
-    <div class="admin-header">
-        <div class="container">
-            <h1>🔧 Pannello Amministratore - Autosport</h1>
-            <a href="index.html" class="btn-view-site" target="_blank">👁️ Visualizza Sito</a>
+<body class="admin-body">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <h2>🔐 Login Admin</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" required placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">
+                    Accedi
+                </button>
+                <p style="margin-top: 15px; text-align: center; color: #6b7280; font-size: 0.9em;">
+                    Username: <strong>admin</strong><br>
+                    Password: <strong>autosport2024</strong>
+                </p>
+            </form>
         </div>
     </div>
 
-    <div class="container">
-        <div class="admin-tabs">
-            <button class="tab active" onclick="switchTab('add')">➕ Aggiungi Auto</button>
-            <button class="tab" onclick="switchTab('list')">📋 Le Mie Auto</button>
-        </div>
+    <!-- Admin Panel -->
+    <div id="adminPanel" style="display: none;">
+        <header class="admin-header">
+            <div class="container">
+                <h1 class="admin-title">🏎️ Pannello Admin Autosport</h1>
+                <div>
+                    <a href="index.html" class="btn btn-secondary" style="margin-right: 10px;">← Torna al Sito</a>
+                    <button class="logout-btn" onclick="logout()">🚪 Esci</button>
+                </div>
+            </div>
+        </header>
 
-        <!-- Add Car Tab -->
-        <div id="add-tab" class="tab-content active">
-            <div class="success-message" id="successMessage">
-                ✅ Auto aggiunta con successo! Puoi vederla nella sezione "Le Mie Auto"
+        <div class="admin-container">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCars">0</div>
+                    <div class="stat-label">Auto Totali</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgPrice">€0</div>
+                    <div class="stat-label">Prezzo Medio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="newestYear">2024</div>
+                    <div class="stat-label">Anno Più Recente</div>
+                </div>
             </div>
 
-            <form id="addCarForm">
-                <!-- Informazioni Base -->
-                <div class="form-section">
-                    <h3>📝 Informazioni Base</h3>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Marca <span class="required">*</span></label>
-                            <select name="marca" required>
-                                <option value="">Seleziona marca</option>
-                                <option value="abarth">Abarth</option>
-                                <option value="alfa-romeo">Alfa Romeo</option>
-                                <option value="audi">Audi</option>
-                                <option value="bmw">BMW</option>
-                                <option value="citroen">Citroën</option>
-                                <option value="fiat">Fiat</option>
-                                <option value="ford">Ford</option>
-                                <option value="honda">Honda</option>
-                                <option value="hyundai">Hyundai</option>
-                                <option value="jeep">Jeep</option>
-                                <option value="kia">Kia</option>
-                                <option value="lancia">Lancia</option>
-                                <option value="mazda">Mazda</option>
-                                <option value="mercedes">Mercedes-Benz</option>
-                                <option value="mini">Mini</option>
-                                <option value="nissan">Nissan</option>
-                                <option value="opel">Opel</option>
-                                <option value="peugeot">Peugeot</option>
-                                <option value="porsche">Porsche</option>
-                                <option value="renault">Renault</option>
-                                <option value="seat">Seat</option>
-                                <option value="skoda">Skoda</option>
-                                <option value="smart">Smart</option>
-                                <option value="toyota">Toyota</option>
-                                <option value="volkswagen">Volkswagen</option>
-                                <option value="volvo">Volvo</option>
-                            </select>
-                        </div>
+            <!-- Actions -->
+            <div class="admin-actions">
+                <button class="add-car-btn" onclick="openAddCarModal()">
+                    <span>➕</span> Aggiungi Nuova Auto
+                </button>
+            </div>
 
-                        <div class="form-group">
-                            <label>Modello <span class="required">*</span></label>
-                            <input type="text" name="modello" placeholder="Es: Serie 3, Panda, Golf..." required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Prezzo (€) <span class="required">*</span></label>
-                            <input type="number" name="prezzo" placeholder="Es: 25990" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Anno <span class="required">*</span></label>
-                            <select name="anno" required>
-                                <option value="">Seleziona anno</option>
-                                <option value="2024">2024</option>
-                                <option value="2023">2023</option>
-                                <option value="2022">2022</option>
-                                <option value="2021">2021</option>
-                                <option value="2020">2020</option>
-                                <option value="2019">2019</option>
-                                <option value="2018">2018</option>
-                                <option value="2017">2017</option>
-                                <option value="2016">2016</option>
-                                <option value="2015">2015</option>
-                            </select>
-                        </div>
-                    </div>
+            <!-- Cars List -->
+            <div class="cars-list">
+                <h3 style="margin-bottom: 20px;">📋 Le Tue Auto</h3>
+                <div id="adminCarsList">
+                    <!-- Le auto appariranno qui -->
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <!-- Dettagli Tecnici -->
-                <div class="form-section">
-                    <h3>⚙️ Dettagli Tecnici</h3>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>Chilometri <span class="required">*</span></label>
-                            <input type="number" name="km" placeholder="Es: 45000" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Carburante <span class="required">*</span></label>
-                            <select name="carburante" required>
-                                <option value="">Seleziona</option>
-                                <option value="benzina">Benzina</option>
-                                <option value="diesel">Diesel</option>
-                                <option value="gpl">GPL</option>
-                                <option value="metano">Metano</option>
-                                <option value="ibrida">Ibrida</option>
-                                <option value="elettrica">Elettrica</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Potenza (CV) <span class="required">*</span></label>
-                            <input type="number" name="cv" placeholder="Es: 150" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Cambio <span class="required">*</span></label>
-                            <select name="cambio" required>
-                                <option value="">Seleziona</option>
-                                <option value="Manuale">Manuale</option>
-                                <option value="Automatico">Automatico</option>
-                                <option value="Semiautomatico">Semiautomatico</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Tipo Auto <span class="required">*</span></label>
-                            <select name="tipo" required>
-                                <option value="">Seleziona</option>
-                                <option value="citycar">City Car</option>
-                                <option value="berlina">Berlina</option>
-                                <option value="suv">SUV</option>
-                                <option value="station">Station Wagon</option>
-                                <option value="coupe">Coupé</option>
-                                <option value="cabrio">Cabriolet</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Numero Posti</label>
-                            <select name="posti">
-                                <option value="2">2</option>
-                                <option value="4">4</option>
-                                <option value="5" selected>5</option>
-                                <option value="7">7</option>
-                            </select>
-                        </div>
+    <!-- Modal Add/Edit Car -->
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">➕ Aggiungi Auto</h2>
+                <button class="close-modal" onclick="closeCarModal()">×</button>
+            </div>
+            
+            <form id="carForm" onsubmit="saveCar(event)">
+                <input type="hidden" id="editCarId">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Marca *</label>
+                        <input type="text" id="carMarca" required placeholder="Es: BMW">
                     </div>
-                </div>
-
-                <!-- Descrizione -->
-                <div class="form-section">
-                    <h3>📄 Descrizione e Optional</h3>
+                    
+                    <div class="form-group">
+                        <label>Modello *</label>
+                        <input type="text" id="carModello" required placeholder="Es: Serie 3">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tipo Auto *</label>
+                        <select id="carTipo" required>
+                            <option value="">Seleziona tipo</option>
+                            <option value="berlina">Berlina</option>
+                            <option value="suv">SUV</option>
+                            <option value="citycar">City Car</option>
+                            <option value="station">Station Wagon</option>
+                            <option value="sportiva">Sportiva</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Anno *</label>
+                        <input type="number" id="carAnno" required placeholder="2023" min="1980" max="2025">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Chilometri *</label>
+                        <input type="number" id="carKm" required placeholder="25000" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Carburante *</label>
+                        <select id="carCarburante" required>
+                            <option value="">Seleziona</option>
+                            <option value="benzina">Benzina</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="ibrida">Ibrida</option>
+                            <option value="elettrica">Elettrica</option>
+                            <option value="gpl">GPL</option>
+                            <option value="metano">Metano</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Prezzo (€) *</label>
+                        <input type="number" id="carPrezzo" required placeholder="25990" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Potenza (CV) *</label>
+                        <input type="number" id="carCv" required placeholder="150" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Cambio *</label>
+                        <select id="carCambio" required>
+                            <option value="">Seleziona</option>
+                            <option value="Manuale">Manuale</option>
+                            <option value="Automatico">Automatico</option>
+                            <option value="Semiautomatico">Semiautomatico</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>N° Posti *</label>
+                        <input type="number" id="carPosti" required placeholder="5" min="2" max="9">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Garantita</label>
+                        <select id="carGarantita">
+                            <option value="true">Sì</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Emoji 🚗</label>
+                        <input type="text" id="carEmoji" placeholder="🚗" maxlength="2">
+                    </div>
+                    
                     <div class="form-group full-width">
-                        <label>Descrizione Auto</label>
-                        <textarea name="descrizione" placeholder="Descrivi lo stato dell'auto, optional inclusi, eventuali note..."></textarea>
-                    </div>
-
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="garantita" name="garantita" value="true" checked>
-                        <label for="garantita">✓ Auto garantita e certificata</label>
+                        <label>Descrizione (opzionale)</label>
+                        <textarea id="carDescrizione" rows="4" placeholder="Descrivi l'auto, optional, condizioni..."></textarea>
                     </div>
                 </div>
-
-                <!-- Foto -->
-                <div class="form-section">
-                    <h3>📸 Foto Auto</h3>
-                    <div class="upload-area" id="uploadArea">
-                        <div class="upload-icon">📷</div>
-                        <div class="upload-text">Clicca per caricare foto o trascina qui</div>
-                        <div class="upload-hint">Consigliato: minimo 5 foto (frontale, retro, interni, dettagli)</div>
-                        <input type="file" id="photoInput" accept="image/*" multiple style="display: none;">
-                    </div>
-                    <div class="preview-grid" id="previewGrid"></div>
-                </div>
-
-                <!-- Actions -->
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary">
-                        <span>✓</span> Pubblica Auto
-                    </button>
-                    <button type="button" class="btn-secondary" onclick="resetForm()">
+                
+                <div style="margin-top: 30px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn btn-secondary" onclick="closeCarModal()">
                         Annulla
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        💾 Salva Auto
                     </button>
                 </div>
             </form>
         </div>
-
-        <!-- Car List Tab -->
-        <div id="list-tab" class="tab-content">
-            <div class="car-list" id="carList">
-                <!-- Auto saranno inserite qui -->
-            </div>
-        </div>
     </div>
 
-    <script>
-        let uploadedPhotos = [];
-
-        // Tab switching
-        function switchTab(tab) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            
-            event.target.classList.add('active');
-            document.getElementById(tab + '-tab').classList.add('active');
-            
-            if (tab === 'list') {
-                loadCarList();
-            }
-        }
-
-        // Upload area
-        const uploadArea = document.getElementById('uploadArea');
-        const photoInput = document.getElementById('photoInput');
-        const previewGrid = document.getElementById('previewGrid');
-
-        uploadArea.addEventListener('click', () => photoInput.click());
-
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
-
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
-
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            handleFiles(e.dataTransfer.files);
-        });
-
-        photoInput.addEventListener('change', (e) => {
-            handleFiles(e.target.files);
-        });
-
-        function handleFiles(files) {
-            Array.from(files).forEach(file => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        uploadedPhotos.push(e.target.result);
-                        displayPreviews();
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        }
-
-        function displayPreviews() {
-            previewGrid.innerHTML = uploadedPhotos.map((photo, index) => `
-                <div class="preview-item">
-                    <img src="${photo}" alt="Foto ${index + 1}">
-                    <button type="button" class="preview-remove" onclick="removePhoto(${index})">×</button>
-                </div>
-            `).join('');
-        }
-
-        function removePhoto(index) {
-            uploadedPhotos.splice(index, 1);
-            displayPreviews();
-        }
-
-        // Form submission
-        document.getElementById('addCarForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(e.target);
-            const carData = {
-                id: Date.now(),
-                marca: formData.get('marca'),
-                modello: formData.get('modello'),
-                prezzo: parseInt(formData.get('prezzo')),
-                anno: parseInt(formData.get('anno')),
-                km: parseInt(formData.get('km')),
-                carburante: formData.get('carburante'),
-                cv: parseInt(formData.get('cv')),
-                cambio: formData.get('cambio'),
-                tipo: formData.get('tipo'),
-                posti: parseInt(formData.get('posti')),
-                descrizione: formData.get('descrizione'),
-                garantita: formData.get('garantita') === 'true',
-                photos: uploadedPhotos,
-                emoji: getCarEmoji(formData.get('tipo'))
-            };
-
-            // Salva nel localStorage
-            let cars = JSON.parse(localStorage.getItem('autosport_cars') || '[]');
-            cars.push(carData);
-            localStorage.setItem('autosport_cars', JSON.stringify(cars));
-
-            // Aggiorna anche il database nel script.js
-            updateMainSite(cars);
-
-            // Mostra messaggio di successo
-            const successMsg = document.getElementById('successMessage');
-            successMsg.classList.add('show');
-            setTimeout(() => successMsg.classList.remove('show'), 5000);
-
-            // Reset form
-            resetForm();
-        });
-
-        function getCarEmoji(tipo) {
-            const emojis = {
-                'citycar': '🚗',
-                'berlina': '🚙',
-                'suv': '🚕',
-                'station': '🚐',
-                'coupe': '🏎️',
-                'cabrio': '🚘'
-            };
-            return emojis[tipo] || '🚗';
-        }
-
-        function resetForm() {
-            document.getElementById('addCarForm').reset();
-            uploadedPhotos = [];
-            displayPreviews();
-        }
-
-        function updateMainSite(cars) {
-            // Aggiorna il database nel file principale
-            localStorage.setItem('autosport_cars', JSON.stringify(cars));
-        }
-
-        function loadCarList() {
-            const cars = JSON.parse(localStorage.getItem('autosport_cars') || '[]');
-            const carList = document.getElementById('carList');
-
-            if (cars.length === 0) {
-                carList.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">🚗</div>
-                        <h3>Nessuna auto ancora</h3>
-                        <p>Inizia ad aggiungere le tue auto dalla sezione "Aggiungi Auto"</p>
-                    </div>
-                `;
-                return;
-            }
-
-            carList.innerHTML = cars.map(car => `
-                <div class="car-item">
-                    <div class="car-item-image">
-                        ${car.photos && car.photos[0] ? 
-                            `<img src="${car.photos[0]}" style="width: 100%; height: 100%; object-fit: cover;">` : 
-                            `<span>${car.emoji}</span>`
-                        }
-                    </div>
-                    <div class="car-item-info">
-                        <h4>${car.marca.toUpperCase()} ${car.modello}</h4>
-                        <div class="car-item-price">€${car.prezzo.toLocaleString()}</div>
-                        <div class="car-item-specs">
-                            <div class="car-item-spec"><strong>Anno:</strong> ${car.anno}</div>
-                            <div class="car-item-spec"><strong>Km:</strong> ${car.km.toLocaleString()}</div>
-                            <div class="car-item-spec"><strong>Carb:</strong> ${car.carburante}</div>
-                            <div class="car-item-spec"><strong>CV:</strong> ${car.cv}</div>
-                            <div class="car-item-spec"><strong>Cambio:</strong> ${car.cambio}</div>
-                            <div class="car-item-spec"><strong>Tipo:</strong> ${car.tipo}</div>
-                        </div>
-                    </div>
-                    <div class="car-item-actions">
-                        <button class="btn-edit" onclick="editCar(${car.id})">✏️ Modifica</button>
-                        <button class="btn-delete" onclick="deleteCar(${car.id})">🗑️ Elimina</button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function editCar(id) {
-            alert('Funzione modifica in arrivo! Per ora puoi eliminare e ricreare l\'auto.');
-        }
-
-        function deleteCar(id) {
-            if (confirm('Sei sicuro di voler eliminare questa auto?')) {
-                let cars = JSON.parse(localStorage.getItem('autosport_cars') || '[]');
-                cars = cars.filter(car => car.id !== id);
-                localStorage.setItem('autosport_cars', JSON.stringify(cars));
-                updateMainSite(cars);
-                loadCarList();
-            }
-        }
-
-        // Load cars on page load
-        loadCarList();
-    </script>
+    <script src="admin.js"></script>
 </body>
 </html>

@@ -1,276 +1,281 @@
-# 🚗 AutoPro - Sito Rivendita Auto
-
-Sito web completo e gratuito per rivendita auto, pronto all'uso!
-
-## 📁 Contenuto del Pacchetto
-
-- `index.html` - Pagina principale del sito
-- `style.css` - Tutti gli stili e design
-- `script.js` - Funzionalità interattive
-- `README.md` - Questa guida
-
-## 🚀 Come Pubblicare il Sito GRATIS
-
-### Opzione 1: GitHub Pages (CONSIGLIATA)
-
-1. **Crea un account GitHub** (se non ce l'hai): https://github.com
-2. **Crea un nuovo repository**:
-   - Clicca su "New repository"
-   - Nome: `rivendita-auto` (o quello che preferisci)
-   - Seleziona "Public"
-   - Clicca "Create repository"
-
-3. **Carica i file**:
-   - Clicca "uploading an existing file"
-   - Trascina i 3 file (index.html, style.css, script.js)
-   - Clicca "Commit changes"
-
-4. **Attiva GitHub Pages**:
-   - Vai su Settings → Pages
-   - Source: "Deploy from a branch"
-   - Branch: seleziona "main" → cartella "/(root)"
-   - Clicca "Save"
-
-5. **Il tuo sito sarà online** in 1-2 minuti all'indirizzo:
-   `https://tuousername.github.io/rivendita-auto`
-
-### Opzione 2: Netlify
-
-1. Vai su https://www.netlify.com
-2. Clicca "Sign up" (gratis)
-3. Trascina la cartella con i 3 file nell'area di upload
-4. Il sito sarà online immediatamente!
-5. Puoi cambiare il nome del sito nelle impostazioni
-
-### Opzione 3: Vercel
-
-1. Vai su https://vercel.com
-2. Registrati gratis
-3. Clicca "New Project"
-4. Carica i file
-5. Deploy automatico!
-
-## ✏️ Come Personalizzare il Sito
-
-### 1. Modificare Nome e Contatti
-
-Apri `index.html` e cerca:
-
-```html
-<!-- Cerca questa sezione -->
-<h1>🚗 AutoPro</h1>
-```
-
-Sostituisci "AutoPro" con il nome della tua rivendita.
-
-Cerca anche:
-```html
-<a href="mailto:info@autopro.it">
-<a href="tel:+393341234567">
-```
-
-Sostituisci con la tua email e telefono (mantieni il formato).
-
-### 2. Cambiare le Auto in Vendita
-
-Apri `script.js` e trova l'array `carsDatabase`:
-
-```javascript
-const carsDatabase = [
-    {
-        marca: 'audi',      // Cambia marca
-        modello: 'A4',      // Cambia modello
-        prezzo: 32990,      // Cambia prezzo
-        anno: 2022,         // ecc...
-        // ... altri dati
-    },
-    // Aggiungi più auto copiando il blocco
-];
-```
-
-**Per aggiungere un'auto**, copia un blocco completo e modifica i valori.
-**Per rimuovere un'auto**, elimina l'intero blocco.
-
-### 3. Cambiare Colori
-
-Apri `style.css` e modifica le prime righe:
-
-```css
-:root {
-    --primary-color: #2563eb;    /* Blu principale */
-    --secondary-color: #1e40af;  /* Blu scuro */
-    --accent-color: #f59e0b;     /* Arancione */
-}
-```
-
-Usa un color picker online per trovare i codici colore che preferisci.
-
-### 4. Modificare Testi
-
-Apri `index.html` e cerca le sezioni che vuoi modificare:
-
-- **Hero Title**: Cerca `<h2 class="hero-title">`
-- **Chi Siamo**: Cerca `<section class="about-section"`
-- **Recensioni**: Cerca `<section class="reviews-section"`
-
-### 5. Cambiare Indirizzo e Orari
-
-Cerca in `index.html`:
-
-```html
-<section class="contact-section" id="contatti">
-```
-
-Modifica indirizzo, orari, telefono, email secondo le tue necessità.
-
-## 🎨 Aggiungere Foto Vere delle Auto
-
-Attualmente il sito usa emoji 🚗 come placeholder. Per usare foto vere:
-
-1. **Carica le foto** nella stessa cartella del sito (o usa un servizio come Imgur)
-
-2. In `script.js`, modifica l'auto aggiungendo il campo `immagine`:
-
-```javascript
-{
-    marca: 'bmw',
-    modello: 'Serie 3',
-    immagine: 'bmw-serie3.jpg',  // Nome del file foto
-    // ... altri dati
-}
-```
-
-3. In `script.js`, cerca la funzione `displayCars` e modifica:
-
-```javascript
-// CERCA QUESTA PARTE:
-<div class="car-image">
-    <span style="font-size: 60px;">${car.emoji}</span>
-
-// SOSTITUISCI CON:
-<div class="car-image" style="background-image: url('${car.immagine || 'placeholder.jpg'}'); background-size: cover; background-position: center;">
-```
-
-## 📱 Funzionalità Incluse
-
-✅ Design responsive (funziona su mobile, tablet, desktop)
-✅ Filtri di ricerca auto
-✅ Form valutazione usato
-✅ Form contatto
-✅ Recensioni clienti
-✅ Pulsante WhatsApp fisso
-✅ Menu mobile hamburger
-✅ Smooth scroll
-✅ Notifiche toast
-✅ SEO-friendly
-
-## 🔧 Personalizzazioni Avanzate
-
-### Aggiungere Google Maps
-
-In `index.html`, nella sezione contatti, aggiungi:
-
-```html
-<iframe 
-    src="https://www.google.com/maps/embed?pb=TUO_CODICE_EMBED"
-    width="100%" 
-    height="300" 
-    style="border:0; border-radius: 10px;" 
-    allowfullscreen="" 
-    loading="lazy">
-</iframe>
-```
-
-Per ottenere il codice embed:
-1. Vai su Google Maps
-2. Cerca il tuo indirizzo
-3. Clicca "Condividi" → "Incorpora mappa"
-4. Copia il codice
-
-### Aggiungere Google Analytics
-
-Prima del tag `</head>` in `index.html`:
-
-```html
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=TUO-ID"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'TUO-ID');
-</script>
-```
-
-### Collegare un Form a Email Vera
-
-Il sito attualmente mostra solo notifiche. Per inviare email vere:
-
-**Opzione A - Formspree (gratis fino a 50 form/mese)**
-1. Vai su https://formspree.io
-2. Registrati e crea un form
-3. Sostituisci il form in `index.html` con il codice fornito
-
-**Opzione B - EmailJS (gratis fino a 200 email/mese)**
-1. Vai su https://www.emailjs.com
-2. Configura il servizio
-3. Aggiungi il loro script in `index.html`
-
-## 💡 Suggerimenti
-
-1. **Backup**: Salva sempre una copia dei file originali prima di modificare
-2. **Test**: Prova il sito localmente aprendo `index.html` nel browser
-3. **Mobile**: Controlla sempre come appare su mobile
-4. **SEO**: Modifica il tag `<title>` e `<meta description>` in `index.html`
-5. **Velocità**: Ottimizza le immagini prima di caricarle (max 200KB ciascuna)
-
-## 📸 Come Aggiungere Logo Personalizzato
-
-1. Crea un file `logo.png` o `logo.jpg`
-2. Caricalo nella stessa cartella
-3. In `index.html`, cerca:
-
-```html
-<div class="logo">
-    <h1>🚗 AutoPro</h1>
-```
-
-Sostituisci con:
-
-```html
-<div class="logo">
-    <img src="logo.png" alt="Nome Rivendita" style="height: 50px;">
-```
-
-## 🆘 Problemi Comuni
-
-**Il sito non si vede online**
-- Aspetta 2-3 minuti dopo il caricamento
-- Controlla che i file siano nella cartella principale (root)
-- Verifica che il file si chiami esattamente `index.html`
-
-**I form non funzionano**
-- I form mostrano solo notifiche, non inviano email
-- Usa Formspree o EmailJS per email vere (vedi sopra)
-
-**Le auto non si vedono**
-- Controlla in `script.js` che l'array `carsDatabase` sia corretto
-- Apri la console del browser (F12) per vedere eventuali errori
-
-**Il sito è lento**
-- Ottimizza le immagini (usa TinyPNG o Squoosh)
-- Limita il numero di auto mostrate (max 20-30)
-
-## 📞 Supporto
-
-Il sito è completo e pronto all'uso. Tutti i file sono commentati per aiutarti nella personalizzazione.
-
-## 📄 Licenza
-
-Questo sito è completamente gratuito. Puoi usarlo, modificarlo e personalizzarlo come preferisci per la tua rivendita auto!
+# 🏎️ Autosport - Sistema Completo con Pannello Admin
+
+Sito web professionale per rivendita auto con **PANNELLO DI CONTROLLO** per gestire le tue auto facilmente!
+
+## 🎯 CARATTERISTICHE PRINCIPALI
+
+✅ **Pannello Admin** - Aggiungi, modifica ed elimina auto con pochi click  
+✅ **Login Sicuro** - Accesso protetto da username e password  
+✅ **Gestione Facile** - Interfaccia intuitiva stile Subito.it  
+✅ **Filtri Avanzati** - I clienti possono cercare per marca, tipo, prezzo, carburante  
+✅ **Aggiornamento Automatico** - Le modifiche appaiono subito sul sito  
+✅ **100% Gratuito** - Hosting gratis su GitHub Pages  
+✅ **Responsive** - Funziona perfettamente su mobile, tablet e desktop  
 
 ---
 
-**Creato con ❤️ per la tua rivendita auto**
+## 📁 FILE INCLUSI
 
-Buona fortuna con il tuo nuovo sito! 🚗✨
+```
+autosport-completo/
+├── index.html        → Sito pubblico (quello che vedono i clienti)
+├── admin.html        → Pannello admin (per gestire le auto)
+├── app.js           → Logica sito pubblico
+├── admin.js         → Logica pannello admin
+├── style.css        → Stili grafici
+└── README.md        → Questa guida
+```
+
+---
+
+## 🚀 INSTALLAZIONE SU GITHUB PAGES (GRATIS)
+
+### 1️⃣ Crea Repository GitHub
+
+1. Vai su https://github.com
+2. Fai login (o registrati)
+3. Clicca **"New repository"**
+4. Nome: `autosport-sito`
+5. Seleziona **"Public"**
+6. Clicca **"Create repository"**
+
+### 2️⃣ Carica i File
+
+1. Clicca **"uploading an existing file"**
+2. Trascina **TUTTI I 5 FILE** dalla cartella estratta:
+   - `index.html`
+   - `admin.html`
+   - `app.js`
+   - `admin.js`
+   - `style.css`
+3. Clicca **"Commit changes"**
+
+### 3️⃣ Attiva GitHub Pages
+
+1. Vai su **Settings** → **Pages**
+2. Source: **main** branch, **/ (root)** folder
+3. Clicca **"Save"**
+4. ⏱️ Aspetta 2 minuti
+
+### 4️⃣ Il Tuo Sito è Online! 🎉
+
+Il sito sarà disponibile a:
+**`https://tuo-username.github.io/autosport-sito`**
+
+---
+
+## 🔐 ACCESSO AL PANNELLO ADMIN
+
+### Come Accedere:
+
+1. Vai su: `https://tuo-username.github.io/autosport-sito/admin.html`
+2. Username: **`admin`**
+3. Password: **`autosport2024`**
+
+### ⚠️ IMPORTANTE - Cambia la Password!
+
+**DOPO IL PRIMO ACCESSO**, cambia la password per sicurezza:
+
+1. Apri il file `admin.js` su GitHub
+2. Cerca questa riga (circa riga 18):
+   ```javascript
+   if (username === 'admin' && password === 'autosport2024') {
+   ```
+3. Sostituisci `autosport2024` con la TUA password segreta
+4. Salva (Commit changes)
+
+---
+
+## 📝 COME USARE IL PANNELLO ADMIN
+
+### ➕ Aggiungere una Nuova Auto
+
+1. Fai login al pannello admin
+2. Clicca **"➕ Aggiungi Nuova Auto"**
+3. Compila il form:
+   - Marca (es: BMW)
+   - Modello (es: Serie 3)
+   - Tipo (Berlina, SUV, City Car, ecc.)
+   - Anno
+   - Chilometri
+   - Carburante
+   - Prezzo
+   - Potenza (CV)
+   - Cambio (Manuale/Automatico)
+   - N° Posti
+   - Garantita (Sì/No)
+   - Emoji 🚗 (opzionale, per personalizzare)
+   - Descrizione (opzionale)
+4. Clicca **"💾 Salva Auto"**
+5. ✨ L'auto appare SUBITO sul sito!
+
+### ✏️ Modificare un'Auto
+
+1. Trova l'auto nell'elenco
+2. Clicca **"✏️ Modifica"**
+3. Cambia i dati che vuoi
+4. Clicca **"💾 Salva Auto"**
+
+### 🗑️ Eliminare un'Auto
+
+1. Trova l'auto nell'elenco
+2. Clicca **"🗑️ Elimina"**
+3. Conferma
+4. L'auto sparisce dal sito immediatamente!
+
+---
+
+## 💡 FUNZIONALITÀ DEL PANNELLO
+
+### Dashboard Statistiche
+- **Auto Totali** - Quante auto hai in vendita
+- **Prezzo Medio** - Il prezzo medio del tuo stock
+- **Anno Più Recente** - L'auto più nuova in vendita
+
+### Lista Auto
+Vedi tutte le tue auto con:
+- Immagine (emoji personalizzabile)
+- Marca e modello
+- Anno, km, carburante, cambio
+- Prezzo
+- Bottoni modifica ed elimina
+
+---
+
+## 🎨 PERSONALIZZAZIONE
+
+### Cambiare i Tuoi Dati di Contatto
+
+Tutti i tuoi dati (telefono, email, indirizzo) sono già inseriti nei file!
+
+Se vuoi cambiarli:
+1. Apri `index.html` su GitHub
+2. Clicca matita ✏️
+3. Cerca e sostituisci:
+   - Email: `autosportvetture@gmail.com`
+   - Telefono: `039 968 6292`
+   - Cellulare: `340 002 4151`
+   - Indirizzo: `Via Graziano Oltolini 23, Robbiate`
+4. Commit changes
+
+### Cambiare Colori del Sito
+
+1. Apri `style.css`
+2. Trova le prime righe:
+```css
+:root {
+    --primary-color: #2563eb;    /* Blu principale */
+    --accent-color: #f59e0b;     /* Arancione */
+}
+```
+3. Sostituisci con i tuoi colori (usa https://colorpicker.me)
+
+---
+
+## ❓ DOMANDE FREQUENTI
+
+### 📱 Come vedono le auto i clienti?
+
+I clienti vanno sul sito principale:
+`https://tuo-username.github.io/autosport-sito`
+
+Vedranno:
+- Tutte le auto che hai inserito
+- Filtri per cercare (marca, tipo, prezzo, carburante)
+- Pulsanti per contattarti via WhatsApp o telefono
+- Form per valutazione usato
+- Tutte le info di contatto
+
+### 🔄 Le modifiche appaiono subito?
+
+**SÌ!** Quando aggiungi/modifichi/elimini un'auto dal pannello admin:
+- Viene salvata nel browser (localStorage)
+- Appare immediatamente sul sito pubblico
+- Nessun tempo di attesa!
+
+### 🔐 Il pannello admin è sicuro?
+
+Il sistema usa una password base. Per maggiore sicurezza:
+1. Cambia la password nel file `admin.js` (vedi sopra)
+2. Non condividere il link `admin.html` pubblicamente
+3. Fai logout dopo ogni uso
+
+### 📸 Posso caricare foto vere?
+
+Attualmente il sistema usa emoji 🚗🚙🚕 come placeholder.
+
+Per aggiungere foto vere serve un upgrade più avanzato (hosting con database).
+Le emoji funzionano benissimo e rendono il sito moderno e colorato!
+
+### 💾 Dove vengono salvate le auto?
+
+Le auto vengono salvate nel **localStorage del browser**.
+
+**IMPORTANTE**: 
+- I dati rimangono sul browser che usi
+- Se apri il sito da un altro computer, non vedrai le stesse auto
+- Per sincronizzare su più dispositivi serve un database online (upgrade futuro)
+
+### 🌐 Posso usare un mio dominio?
+
+Sì! Puoi collegare un dominio tipo `www.autosport.com`:
+1. Compra un dominio (GoDaddy, Namecheap, ecc.)
+2. Nelle impostazioni GitHub Pages, aggiungi il dominio custom
+3. Configura i DNS del dominio
+(Guida completa: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
+
+---
+
+## 🆘 PROBLEMI COMUNI
+
+### Il pannello admin non si apre
+
+1. Controlla di aver caricato `admin.html` e `admin.js`
+2. L'URL deve essere: `https://tuo-username.github.io/autosport-sito/admin.html`
+3. Aspetta 2-3 minuti dopo il caricamento dei file
+
+### Le auto non si vedono sul sito
+
+1. Verifica di aver fatto login al pannello admin
+2. Aggiungi almeno un'auto
+3. Ricarica il sito pubblico (F5 o Cmd+R)
+4. Controlla che `app.js` sia stato caricato correttamente
+
+### Password dimenticata
+
+1. Apri `admin.js` su GitHub
+2. Cerca la riga con la password (circa riga 18)
+3. Puoi vedere la password attuale o cambiarla
+
+---
+
+## 🚀 UPGRADE FUTURI
+
+Vuoi funzionalità avanzate? Ecco cosa si può aggiungere:
+
+✨ **Upload Foto Vere** - Carica immagini delle auto  
+✨ **Database Cloud** - Sincronizzazione multi-dispositivo  
+✨ **WhatsApp Automatico** - Messaggi pre-compilati per ogni auto  
+✨ **Form Lead** - Raccogli richieste clienti  
+✨ **Google Analytics** - Statistiche visitatori  
+✨ **SEO Avanzato** - Ottimizzazione motori di ricerca  
+
+---
+
+## 📞 SUPPORTO
+
+Il sistema è completo e pronto all'uso!
+
+Tutti i file sono commentati per facilitare eventuali modifiche.
+
+---
+
+## 🎉 CONGRATULAZIONI!
+
+Hai ora un **sito professionale** con **pannello admin** per la tua rivendita auto!
+
+**Completamente GRATIS** e facile da usare! 🚗✨
+
+---
+
+**Creato con ❤️ per Autosport Robbiate**

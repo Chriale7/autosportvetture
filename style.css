@@ -355,6 +355,25 @@ section {
     font-size: 0.9em;
 }
 
+.car-description {
+    padding: 15px 0;
+    color: var(--text-dark);
+    font-size: 0.95em;
+    line-height: 1.6;
+    border-top: 1px solid var(--border-color);
+    margin-top: 15px;
+    padding-top: 15px;
+}
+
+.admin-link {
+    opacity: 0.6;
+    font-size: 0.9em;
+}
+
+.admin-link:hover {
+    opacity: 1;
+}
+
 /* About Section */
 .about-content {
     display: grid;
