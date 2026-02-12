@@ -2,22 +2,50 @@
 
 let allCars = [];
 let filteredCars = [];
+let db;
 
-// Load cars from localStorage
-function loadCars() {
-    const cars = localStorage.getItem('autosport_cars');
-    allCars = cars ? JSON.parse(cars) : [];
+// Initialize IndexedDB
+function initDB() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('AutosportDB', 1);
+        
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+            db = request.result;
+            resolve(db);
+        };
+        
+        request.onupgradeneeded = (event) => {
+            db = event.target.result;
+            if (!db.objectStoreNames.contains('cars')) {
+                db.createObjectStore('cars', { keyPath: 'id' });
+            }
+        };
+    });
+}
+
+// Load cars from IndexedDB
+async function loadCars() {
+    await initDB();
     
-    console.log('=== LOADING CARS ===');
-    console.log('Total cars:', allCars.length);
-    if (allCars.length > 0) {
-        console.log('First car:', allCars[0]);
-        console.log('First car has images?', allCars[0].images ? 'YES (' + allCars[0].images.length + ')' : 'NO');
-    }
+    const transaction = db.transaction(['cars'], 'readonly');
+    const objectStore = transaction.objectStore('cars');
+    const request = objectStore.getAll();
     
-    filteredCars = [...allCars];
-    displayCars(filteredCars);
-    updateCarsCount();
+    request.onsuccess = () => {
+        allCars = request.result || [];
+        
+        console.log('=== LOADING CARS ===');
+        console.log('Total cars:', allCars.length);
+        if (allCars.length > 0) {
+            console.log('First car:', allCars[0]);
+            console.log('First car has images?', allCars[0].images ? 'YES (' + allCars[0].images.length + ')' : 'NO');
+        }
+        
+        filteredCars = [...allCars];
+        displayCars(filteredCars);
+        updateCarsCount();
+    };
 }
 
 // Display cars

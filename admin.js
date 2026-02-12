@@ -1,7 +1,10 @@
 // Admin Login and Management System
 
 // Check if user is logged in
-function checkAuth() {
+async function checkAuth() {
+    // Initialize DB first
+    await initDB();
+    
     const isLoggedIn = localStorage.getItem('adminLoggedIn');
     if (isLoggedIn === 'true') {
         document.getElementById('loginScreen').style.display = 'none';
@@ -12,8 +15,12 @@ function checkAuth() {
 }
 
 // Handle login
-function handleLogin(event) {
+async function handleLogin(event) {
     event.preventDefault();
+    
+    // Initialize DB
+    await initDB();
+    
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
@@ -40,20 +47,71 @@ function logout() {
     }
 }
 
-// Get all cars from localStorage
-function getAllCars() {
-    const cars = localStorage.getItem('autosport_cars');
-    return cars ? JSON.parse(cars) : [];
+// IndexedDB for unlimited image storage
+let db;
+
+// Initialize IndexedDB
+function initDB() {
+    return new Promise((resolve, reject) => {
+        const request = indexedDB.open('AutosportDB', 1);
+        
+        request.onerror = () => reject(request.error);
+        request.onsuccess = () => {
+            db = request.result;
+            resolve(db);
+        };
+        
+        request.onupgradeneeded = (event) => {
+            db = event.target.result;
+            if (!db.objectStoreNames.contains('cars')) {
+                db.createObjectStore('cars', { keyPath: 'id' });
+            }
+        };
+    });
 }
 
-// Save all cars to localStorage
+// Get all cars from IndexedDB
+function getAllCars() {
+    return new Promise((resolve, reject) => {
+        if (!db) {
+            resolve([]);
+            return;
+        }
+        
+        const transaction = db.transaction(['cars'], 'readonly');
+        const objectStore = transaction.objectStore('cars');
+        const request = objectStore.getAll();
+        
+        request.onsuccess = () => resolve(request.result || []);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+// Save all cars to IndexedDB
 function saveAllCars(cars) {
-    localStorage.setItem('autosport_cars', JSON.stringify(cars));
+    return new Promise((resolve, reject) => {
+        if (!db) {
+            reject('Database not initialized');
+            return;
+        }
+        
+        const transaction = db.transaction(['cars'], 'readwrite');
+        const objectStore = transaction.objectStore('cars');
+        
+        // Clear all first
+        objectStore.clear();
+        
+        // Add all cars
+        cars.forEach(car => objectStore.add(car));
+        
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(transaction.error);
+    });
 }
 
 // Load cars in admin panel
-function loadAdminCars() {
-    const cars = getAllCars();
+async function loadAdminCars() {
+    const cars = await getAllCars();
     const container = document.getElementById('adminCarsList');
     
     if (cars.length === 0) {
@@ -84,8 +142,8 @@ function loadAdminCars() {
 }
 
 // Update statistics
-function updateStats() {
-    const cars = getAllCars();
+async function updateStats() {
+    const cars = await getAllCars();
     
     // Total cars
     document.getElementById('totalCars').textContent = cars.length;
@@ -220,10 +278,10 @@ function handleDragEnd(e) {
 }
 
 // Save car (add or edit)
-function saveCar(event) {
+async function saveCar(event) {
     event.preventDefault();
     
-    const cars = getAllCars();
+    const cars = await getAllCars();
     const editId = document.getElementById('editCarId').value;
     const imageInput = document.getElementById('carImages');
     const files = imageInput.files;
@@ -240,7 +298,7 @@ function saveCar(event) {
         
         for (let i = 0; i < files.length; i++) {
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = async function(e) {
                 images.push(e.target.result);
                 processed++;
                 
@@ -249,7 +307,7 @@ function saveCar(event) {
                 // When all images are processed, save the car
                 if (processed === files.length) {
                     console.log('All images loaded! Saving car with', images.length, 'images');
-                    saveCarWithImages(cars, editId, images);
+                    await saveCarWithImages(cars, editId, images);
                 }
             };
             reader.readAsDataURL(files[i]);
@@ -259,7 +317,7 @@ function saveCar(event) {
         const existingCar = cars.find(c => c.id === parseInt(editId));
         const images = existingCar?.images || [];
         console.log('Editing car, keeping existing', images.length, 'images');
-        saveCarWithImages(cars, editId, images);
+        await saveCarWithImages(cars, editId, images);
     } else {
         // New car without images
         console.log('ERROR: New car without images!');
@@ -267,7 +325,7 @@ function saveCar(event) {
     }
 }
 
-function saveCarWithImages(cars, editId, images) {
+async function saveCarWithImages(cars, editId, images) {
     console.log('saveCarWithImages called with', images.length, 'images');
     
     const carData = {
@@ -302,18 +360,18 @@ function saveCarWithImages(cars, editId, images) {
         showNotification('Auto aggiunta! (' + images.length + ' foto)', 'success');
     }
     
-    console.log('Saving to localStorage...');
-    saveAllCars(cars);
+    console.log('Saving to IndexedDB...');
+    await saveAllCars(cars);
     console.log('Cars saved! Total cars:', cars.length);
     
     closeCarModal();
-    loadAdminCars();
-    updateStats();
+    await loadAdminCars();
+    await updateStats();
 }
 
 // Edit car
-function editCar(id) {
-    const cars = getAllCars();
+async function editCar(id) {
+    const cars = await getAllCars();
     const car = cars.find(c => c.id === id);
     
     if (!car) {
@@ -348,18 +406,18 @@ function editCar(id) {
 }
 
 // Delete car
-function deleteCar(id) {
+async function deleteCar(id) {
     if (!confirm('Sei sicuro di voler eliminare questa auto?')) {
         return;
     }
     
-    let cars = getAllCars();
+    let cars = await getAllCars();
     cars = cars.filter(c => c.id !== id);
-    saveAllCars(cars);
+    await saveAllCars(cars);
     
     showNotification('Auto eliminata con successo!', 'success');
-    loadAdminCars();
-    updateStats();
+    await loadAdminCars();
+    await updateStats();
 }
 
 // Notification function
