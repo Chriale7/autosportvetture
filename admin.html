@@ -435,20 +435,16 @@
                         </select>
                     </div>
                     
-                    <div class="form-group">
-                        <label>Emoji 🚗</label>
-                        <input type="text" id="carEmoji" placeholder="🚗" maxlength="2">
-                    </div>
-                    
                     <div class="form-group full-width">
-                        <label>Foto Auto (opzionale)</label>
-                        <input type="file" id="carImage" accept="image/*" onchange="previewImage(event)">
-                        <div id="imagePreview" style="margin-top: 10px; display: none;">
-                            <img id="previewImg" style="max-width: 200px; max-height: 150px; border-radius: 8px; border: 2px solid #e5e7eb;">
-                        </div>
+                        <label>Foto Auto * (fino a 50 foto)</label>
+                        <input type="file" id="carImages" accept="image/*" multiple onchange="previewImages(event)" required>
                         <p style="font-size: 0.85em; color: #6b7280; margin-top: 5px;">
-                            💡 Carica una foto dell'auto (consigliato: max 500KB)
+                            💡 Seleziona più foto contemporaneamente (Ctrl+Click o Cmd+Click)<br>
+                            🔄 <strong>Trascina le foto</strong> per cambiare l'ordine - La prima foto sarà la copertina!
                         </p>
+                        <div id="imagesPreview" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px;">
+                            <!-- Preview images will appear here -->
+                        </div>
                     </div>
                     
                     <div class="form-group full-width">

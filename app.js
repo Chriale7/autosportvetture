@@ -28,9 +28,8 @@ function displayCars(cars) {
     noMessage.style.display = 'none';
     
     grid.innerHTML = cars.map(car => `
-        <div class="car-card">
-            <div class="car-image" style="${car.image ? `background-image: url('${car.image}'); background-size: cover; background-position: center;` : ''}">
-                ${car.image ? '' : `<span style="font-size: 60px;">${car.emoji || '🚗'}</span>`}
+        <div class="car-card" onclick="window.location.href='dettaglio.html?id=${car.id}'" style="cursor: pointer;">
+            <div class="car-image" style="${car.images && car.images[0] ? `background-image: url('${car.images[0]}'); background-size: cover; background-position: center;` : 'background: #ddd;'}">
                 ${car.garantita ? '<div class="car-badge">✓ Garantita</div>' : ''}
             </div>
             <div class="car-info">
@@ -56,8 +55,7 @@ function displayCars(cars) {
                         <strong>Tipo:</strong> ${capitalizeFirst(car.tipo)}
                     </div>
                 </div>
-                ${car.descrizione ? `<p class="car-description">${car.descrizione}</p>` : ''}
-                <div class="car-actions">
+                <div class="car-actions" onclick="event.stopPropagation();">
                     <button class="btn btn-primary" onclick="contactAboutCar('${car.marca} ${car.modello}')">
                         💬 Contattaci
                     </button>

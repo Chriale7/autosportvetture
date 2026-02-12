@@ -68,11 +68,12 @@ function loadAdminCars() {
     
     container.innerHTML = cars.map(car => `
         <div class="car-item">
-            <div class="car-thumb" style="${car.image ? `background-image: url('${car.image}'); background-size: cover; background-position: center;` : ''}">${car.image ? '' : (car.emoji || '🚗')}</div>
+            <div class="car-thumb" style="${car.images && car.images[0] ? `background-image: url('${car.images[0]}'); background-size: cover; background-position: center;` : 'background: #ddd;'}"></div>
             <div class="car-details">
                 <h4>${car.marca.toUpperCase()} ${car.modello}</h4>
                 <p>${car.anno} • ${car.km.toLocaleString()} km • ${capitalizeFirst(car.carburante)} • ${car.cambio}</p>
                 <p class="car-price">€${car.prezzo.toLocaleString()}</p>
+                <p style="font-size: 0.85em; color: #6b7280; margin-top: 5px;">${car.images ? car.images.length : 0} foto</p>
             </div>
             <div class="car-actions">
                 <button class="btn-edit" onclick="editCar(${car.id})">✏️ Modifica</button>
@@ -107,6 +108,8 @@ function openAddCarModal() {
     document.getElementById('modalTitle').textContent = '➕ Aggiungi Auto';
     document.getElementById('carForm').reset();
     document.getElementById('editCarId').value = '';
+    document.getElementById('imagesPreview').innerHTML = '';
+    uploadedImages = [];
     document.getElementById('carModal').classList.add('active');
 }
 
@@ -115,17 +118,107 @@ function closeCarModal() {
     document.getElementById('carModal').classList.remove('active');
 }
 
-// Image preview
-function previewImage(event) {
-    const file = event.target.files[0];
-    if (file) {
+// Image preview for multiple images
+let uploadedImages = [];
+
+function previewImages(event) {
+    const files = event.target.files;
+    const previewContainer = document.getElementById('imagesPreview');
+    
+    if (files.length > 50) {
+        showNotification('Massimo 50 foto! Seleziona meno immagini.', 'error');
+        event.target.value = '';
+        return;
+    }
+    
+    // Add new images to existing ones
+    Array.from(files).forEach((file) => {
         const reader = new FileReader();
         reader.onload = function(e) {
-            document.getElementById('previewImg').src = e.target.result;
-            document.getElementById('imagePreview').style.display = 'block';
+            uploadedImages.push(e.target.result);
+            renderImagePreviews();
         };
         reader.readAsDataURL(file);
+    });
+}
+
+function renderImagePreviews() {
+    const previewContainer = document.getElementById('imagesPreview');
+    previewContainer.innerHTML = '';
+    
+    uploadedImages.forEach((imgSrc, index) => {
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'image-preview-item';
+        imgContainer.draggable = true;
+        imgContainer.dataset.index = index;
+        imgContainer.style.cssText = 'position: relative; border: 2px solid #e5e7eb; border-radius: 8px; overflow: hidden; cursor: move;';
+        
+        // Add number badge
+        const badge = document.createElement('div');
+        badge.style.cssText = 'position: absolute; top: 5px; left: 5px; background: #2563eb; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; z-index: 2;';
+        badge.textContent = index + 1;
+        
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        img.style.cssText = 'width: 100%; height: 100px; object-fit: cover;';
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.innerHTML = '×';
+        removeBtn.style.cssText = 'position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; font-size: 18px; line-height: 1; z-index: 2;';
+        removeBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            uploadedImages.splice(index, 1);
+            renderImagePreviews();
+        };
+        
+        // Drag events
+        imgContainer.addEventListener('dragstart', handleDragStart);
+        imgContainer.addEventListener('dragover', handleDragOver);
+        imgContainer.addEventListener('drop', handleDrop);
+        imgContainer.addEventListener('dragend', handleDragEnd);
+        
+        imgContainer.appendChild(badge);
+        imgContainer.appendChild(img);
+        imgContainer.appendChild(removeBtn);
+        previewContainer.appendChild(imgContainer);
+    });
+}
+
+// Drag and drop handlers
+let draggedIndex = null;
+
+function handleDragStart(e) {
+    draggedIndex = parseInt(e.target.dataset.index);
+    e.target.style.opacity = '0.5';
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+    return false;
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const dropIndex = parseInt(e.currentTarget.dataset.index);
+    
+    if (draggedIndex !== null && draggedIndex !== dropIndex) {
+        // Reorder array
+        const draggedItem = uploadedImages[draggedIndex];
+        uploadedImages.splice(draggedIndex, 1);
+        uploadedImages.splice(dropIndex, 0, draggedItem);
+        
+        renderImagePreviews();
     }
+    
+    return false;
+}
+
+function handleDragEnd(e) {
+    e.target.style.opacity = '1';
+    draggedIndex = null;
 }
 
 // Save car (add or edit)
@@ -135,28 +228,19 @@ function saveCar(event) {
     const cars = getAllCars();
     const editId = document.getElementById('editCarId').value;
     
-    // Get image if uploaded
-    let imageData = '';
-    const imageFile = document.getElementById('carImage').files[0];
-    
-    if (imageFile) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            imageData = e.target.result;
-            saveCarData(cars, editId, imageData);
-        };
-        reader.readAsDataURL(imageFile);
-    } else {
-        // If editing and no new image, keep old image
-        if (editId) {
-            const existingCar = cars.find(c => c.id === parseInt(editId));
-            imageData = existingCar?.image || '';
-        }
-        saveCarData(cars, editId, imageData);
+    // Check if images are uploaded
+    if (uploadedImages.length === 0 && !editId) {
+        showNotification('Carica almeno una foto dell\'auto!', 'error');
+        return;
     }
-}
-
-function saveCarData(cars, editId, imageData) {
+    
+    // Use uploaded images or keep existing ones if editing
+    let images = uploadedImages.length > 0 ? uploadedImages : [];
+    if (editId && images.length === 0) {
+        const existingCar = cars.find(c => c.id === parseInt(editId));
+        images = existingCar?.images || [];
+    }
+    
     const carData = {
         id: editId ? parseInt(editId) : Date.now(),
         marca: document.getElementById('carMarca').value.toLowerCase(),
@@ -170,9 +254,8 @@ function saveCarData(cars, editId, imageData) {
         cambio: document.getElementById('carCambio').value,
         posti: parseInt(document.getElementById('carPosti').value),
         garantita: document.getElementById('carGarantita').value === 'true',
-        emoji: document.getElementById('carEmoji').value || '🚗',
         descrizione: document.getElementById('carDescrizione').value || '',
-        image: imageData
+        images: images
     };
     
     if (editId) {
@@ -192,6 +275,7 @@ function saveCarData(cars, editId, imageData) {
     closeCarModal();
     loadAdminCars();
     updateStats();
+    uploadedImages = [];
 }
 
 // Edit car
@@ -217,16 +301,11 @@ function editCar(id) {
     document.getElementById('carCambio').value = car.cambio;
     document.getElementById('carPosti').value = car.posti;
     document.getElementById('carGarantita').value = car.garantita.toString();
-    document.getElementById('carEmoji').value = car.emoji || '🚗';
     document.getElementById('carDescrizione').value = car.descrizione || '';
     
-    // Show existing image if present
-    if (car.image) {
-        document.getElementById('previewImg').src = car.image;
-        document.getElementById('imagePreview').style.display = 'block';
-    } else {
-        document.getElementById('imagePreview').style.display = 'none';
-    }
+    // Load existing images
+    uploadedImages = car.images || [];
+    renderImagePreviews();
     
     document.getElementById('carModal').classList.add('active');
 }
