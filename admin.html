@@ -437,9 +437,10 @@
                     
                     <div class="form-group full-width">
                         <label>Foto Auto *</label>
-                        <input type="file" id="carImages" accept="image/*" multiple>
+                        <input type="file" id="carImages" accept="image/*" multiple onchange="handleImageUpload(event)">
                         <p style="font-size: 0.85em; color: #6b7280; margin-top: 5px;">
-                            💡 Seleziona le foto (Ctrl+Click per più foto insieme)
+                            💡 Seleziona le foto (Ctrl+Click per più foto insieme)<br>
+                            🔄 <strong>Trascina le foto</strong> per riordinarle - La prima è la copertina!
                         </p>
                         <div id="imagesPreview" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px;">
                             <!-- Preview images will appear here -->

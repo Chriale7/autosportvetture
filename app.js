@@ -66,7 +66,6 @@ function displayCars(cars) {
     grid.innerHTML = cars.map(car => `
         <div class="car-card" onclick="window.location.href='dettaglio.html?id=${car.id}'" style="cursor: pointer;">
             <div class="car-image" style="${car.images && car.images[0] ? `background-image: url('${car.images[0]}'); background-size: cover; background-position: center;` : 'background: #ddd;'}">
-                ${car.garantita ? '<div class="car-badge">✓ Garantita</div>' : ''}
             </div>
             <div class="car-info">
                 <h3 class="car-title">${car.marca.toUpperCase()} ${car.modello}</h3>
