@@ -1,51 +1,53 @@
 // Admin Login and Management System
 
-// Check if user is logged in
-function checkAuth() {
+// Admin Login and Management System
+
+// Check if user is logged in on page load
+document.addEventListener('DOMContentLoaded', function() {
     const isLoggedIn = localStorage.getItem('adminLoggedIn');
+    
     if (isLoggedIn === 'true') {
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('adminPanel').style.display = 'block';
-        
-        // Initialize DB and load data
-        initDB().then(() => {
-            loadAdminCars();
-            updateStats();
-        });
+        showAdminPanel();
+    } else {
+        showLoginScreen();
     }
+});
+
+function showLoginScreen() {
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminPanel').style.display = 'none';
 }
 
-// Handle login
+function showAdminPanel() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    
+    // Initialize database and load cars
+    initDB().then(() => {
+        loadAdminCars();
+        updateStats();
+    }).catch(err => {
+        console.error('Error initializing DB:', err);
+        showNotification('Errore caricamento dati', 'error');
+    });
+}
+
+// Handle login form submit
 function handleLogin(event) {
     event.preventDefault();
     
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
-    console.log('Login attempt:', username);
-    
-    // Simple auth
     if (username === 'admin' && password === 'autosport2024') {
-        console.log('Login SUCCESS!');
         localStorage.setItem('adminLoggedIn', 'true');
-        
-        // Hide login, show panel
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('adminPanel').style.display = 'block';
-        
-        showNotification('Login effettuato!', 'success');
-        
-        // Initialize DB and load data
-        initDB().then(() => {
-            loadAdminCars();
-            updateStats();
-        }).catch(err => {
-            console.error('DB init error:', err);
-        });
+        showNotification('Accesso effettuato!', 'success');
+        showAdminPanel();
     } else {
-        console.log('Login FAILED!');
-        showNotification('Username o password errati!', 'error');
+        showNotification('Credenziali errate!', 'error');
     }
+    
+    return false;
 }
 
 // Logout
@@ -580,52 +582,6 @@ function capitalizeFirst(str) {
 }
 
 // Initialize sample data if empty
-function initializeSampleData() {
-    const cars = getAllCars();
-    if (cars.length === 0) {
-        const sampleCars = [
-            {
-                id: Date.now(),
-                marca: 'bmw',
-                modello: 'Serie 3',
-                tipo: 'berlina',
-                anno: 2021,
-                km: 42000,
-                carburante: 'diesel',
-                prezzo: 29990,
-                cv: 190,
-                cambio: 'Automatico',
-                posti: 5,
-                garantita: true,
-                emoji: '🚙',
-                descrizione: 'Bellissima BMW Serie 3 in ottime condizioni'
-            },
-            {
-                id: Date.now() + 1,
-                marca: 'audi',
-                modello: 'A4 Avant',
-                tipo: 'station',
-                anno: 2022,
-                km: 35000,
-                carburante: 'diesel',
-                prezzo: 32990,
-                cv: 190,
-                cambio: 'Automatico',
-                posti: 5,
-                garantita: true,
-                emoji: '🚗',
-                descrizione: 'Audi A4 Avant perfetta per la famiglia'
-            }
-        ];
-        saveAllCars(sampleCars);
-    }
-}
-
-// On page load
-document.addEventListener('DOMContentLoaded', () => {
-    initializeSampleData();
-    checkAuth();
-});
 
 // Close modal when clicking outside
 document.getElementById('carModal')?.addEventListener('click', (e) => {
