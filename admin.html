@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Autosport</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+        .admin-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .admin-header { background: #1f2937; color: white; padding: 20px; margin-bottom: 30px; }
+        .admin-header h1 { margin: 0; }
+        .logout-btn { background: #ef4444; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; float: right; }
+        .btn-add { background: #10b981; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 1.1em; cursor: pointer; margin-bottom: 20px; }
+        .car-list { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .car-item { display: flex; gap: 20px; padding: 15px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 15px; align-items: center; }
+        .car-thumb { width: 120px; height: 80px; background: #ddd; border-radius: 8px; background-size: cover; background-position: center; }
+        .car-info { flex: 1; }
+        .car-info h3 { margin: 0 0 10px 0; }
+        .car-actions { display: flex; gap: 10px; }
+        .btn-edit, .btn-delete { padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-edit { background: #3b82f6; color: white; }
+        .btn-delete { background: #ef4444; color: white; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 800px; width: 90%; max-height: 90vh; overflow-y: auto; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 5px; }
+        .full-width { grid-column: 1 / -1; }
+        .login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .login-box { background: white; padding: 40px; border-radius: 15px; width: 100%; max-width: 400px; }
+        .login-box h2 { text-align: center; margin-bottom: 30px; }
+        #imagePreview { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
+        .preview-item { position: relative; }
+        .preview-item img { width: 100%; height: 80px; object-fit: cover; border-radius: 5px; }
+        .preview-item .remove { position: absolute; top: 5px; right: 5px; background: red; color: white; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer; }
+        .preview-item .number { position: absolute; top: 5px; left: 5px; background: #2563eb; color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <h2>🔐 Admin Login</h2>
+            <form onsubmit="return login(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="user" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="pass" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">Accedi</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="adminPanel" style="display:none;">
+        <div class="admin-header">
+            <button class="logout-btn" onclick="logout()">Esci</button>
+            <h1>🏎️ Pannello Admin Autosport</h1>
+        </div>
+        
+        <div class="admin-container">
+            <button class="btn-add" onclick="openModal()">➕ Aggiungi Auto</button>
+            
+            <div class="car-list">
+                <h3>Le Tue Auto</h3>
+                <div id="carsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Aggiungi Auto</h2>
+            <form onsubmit="return saveCar(event)">
+                <input type="hidden" id="editId">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Marca *</label>
+                        <input type="text" id="marca" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Modello *</label>
+                        <input type="text" id="modello" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo *</label>
+                        <select id="tipo" required>
+                            <option value="">Seleziona</option>
+                            <option value="berlina">Berlina</option>
+                            <option value="suv">SUV</option>
+                            <option value="citycar">City Car</option>
+                            <option value="station">Station Wagon</option>
+                            <option value="sportiva">Sportiva</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Anno *</label>
+                        <input type="number" id="anno" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Km *</label>
+                        <input type="number" id="km" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Carburante *</label>
+                        <select id="carburante" required>
+                            <option value="">Seleziona</option>
+                            <option value="benzina">Benzina</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="ibrida">Ibrida</option>
+                            <option value="elettrica">Elettrica</option>
+                            <option value="gpl">GPL</option>
+                            <option value="metano">Metano</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Prezzo (€) *</label>
+                        <input type="number" id="prezzo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>CV *</label>
+                        <input type="number" id="cv" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cambio *</label>
+                        <select id="cambio" required>
+                            <option value="">Seleziona</option>
+                            <option value="Manuale">Manuale</option>
+                            <option value="Automatico">Automatico</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Posti *</label>
+                        <input type="number" id="posti" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Garantita</label>
+                        <select id="garantita">
+                            <option value="true">Sì</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Foto (max 10) *</label>
+                        <input type="file" id="images" accept="image/*" multiple onchange="previewImages()">
+                        <small>Le foto saranno ridimensionate automaticamente</small>
+                        <div id="imagePreview"></div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Descrizione</label>
+                        <textarea id="descrizione" rows="3"></textarea>
+                    </div>
+                </div>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button type="button" onclick="closeModal()" style="padding: 10px 20px; margin-right: 10px;">Annulla</button>
+                    <button type="submit" class="btn-add">💾 Salva</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentImages = [];
+        
+        function login(e) {
+            e.preventDefault();
+            if (document.getElementById('user').value === 'admin' && document.getElementById('pass').value === 'autosport2024') {
+                localStorage.setItem('autosport_admin', 'true');
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadCars();
+            } else {
+                alert('Credenziali errate!');
+            }
+            return false;
+        }
+        
+        function logout() {
+            localStorage.removeItem('autosport_admin');
+            location.reload();
+        }
+        
+        function checkAuth() {
+            if (localStorage.getItem('autosport_admin') === 'true') {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadCars();
+            }
+        }
+        
+        function getCars() {
+            return JSON.parse(localStorage.getItem('autosport_cars') || '[]');
+        }
+        
+        function saveCars(cars) {
+            localStorage.setItem('autosport_cars', JSON.stringify(cars));
+        }
+        
+        function loadCars() {
+            const cars = getCars();
+            const list = document.getElementById('carsList');
+            
+            if (cars.length === 0) {
+                list.innerHTML = '<p>Nessuna auto. Clicca "Aggiungi Auto" per iniziare.</p>';
+                return;
+            }
+            
+            list.innerHTML = cars.map(car => `
+                <div class="car-item">
+                    <div class="car-thumb" style="background-image: url('${car.images[0] || ''}')"></div>
+                    <div class="car-info">
+                        <h3>${car.marca.toUpperCase()} ${car.modello}</h3>
+                        <p>${car.anno} • ${car.km.toLocaleString()} km • €${car.prezzo.toLocaleString()} • ${car.images.length} foto</p>
+                    </div>
+                    <div class="car-actions">
+                        <button class="btn-edit" onclick="editCar(${car.id})">✏️ Modifica</button>
+                        <button class="btn-delete" onclick="deleteCar(${car.id})">🗑️ Elimina</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function previewImages() {
+            const files = document.getElementById('images').files;
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            currentImages = [];
+            
+            if (files.length > 10) {
+                alert('Massimo 10 foto!');
+                document.getElementById('images').value = '';
+                return;
+            }
+            
+            Array.from(files).forEach((file, i) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Comprimi l'immagine
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        const maxSize = 800;
+                        
+                        if (width > height && width > maxSize) {
+                            height *= maxSize / width;
+                            width = maxSize;
+                        } else if (height > maxSize) {
+                            width *= maxSize / height;
+                            height = maxSize;
+                        }
+                        
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        const compressed = canvas.toDataURL('image/jpeg', 0.7);
+                        currentImages.push(compressed);
+                        
+                        const div = document.createElement('div');
+                        div.className = 'preview-item';
+                        div.innerHTML = `
+                            <div class="number">${i + 1}</div>
+                            <img src="${compressed}">
+                            <button class="remove" onclick="removeImage(${i})">×</button>
+                        `;
+                        preview.appendChild(div);
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function removeImage(index) {
+            currentImages.splice(index, 1);
+            previewImages();
+        }
+        
+        function openModal() {
+            document.getElementById('modalTitle').textContent = 'Aggiungi Auto';
+            document.getElementById('editId').value = '';
+            document.querySelector('form').reset();
+            currentImages = [];
+            document.getElementById('imagePreview').innerHTML = '';
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+        
+        function saveCar(e) {
+            e.preventDefault();
+            
+            if (currentImages.length === 0) {
+                alert('Carica almeno una foto!');
+                return false;
+            }
+            
+            const cars = getCars();
+            const editId = document.getElementById('editId').value;
+            
+            const car = {
+                id: editId ? parseInt(editId) : Date.now(),
+                marca: document.getElementById('marca').value.toLowerCase(),
+                modello: document.getElementById('modello').value,
+                tipo: document.getElementById('tipo').value,
+                anno: parseInt(document.getElementById('anno').value),
+                km: parseInt(document.getElementById('km').value),
+                carburante: document.getElementById('carburante').value,
+                prezzo: parseInt(document.getElementById('prezzo').value),
+                cv: parseInt(document.getElementById('cv').value),
+                cambio: document.getElementById('cambio').value,
+                posti: parseInt(document.getElementById('posti').value),
+                garantita: document.getElementById('garantita').value === 'true',
+                descrizione: document.getElementById('descrizione').value,
+                images: currentImages
+            };
+            
+            if (editId) {
+                const index = cars.findIndex(c => c.id === parseInt(editId));
+                cars[index] = car;
+                alert('Auto modificata!');
+            } else {
+                cars.push(car);
+                alert('Auto aggiunta!');
+            }
+            
+            saveCars(cars);
+            closeModal();
+            loadCars();
+            return false;
+        }
+        
+        function editCar(id) {
+            const car = getCars().find(c => c.id === id);
+            if (!car) return;
+            
+            document.getElementById('modalTitle').textContent = 'Modifica Auto';
+            document.getElementById('editId').value = car.id;
+            document.getElementById('marca').value = car.marca;
+            document.getElementById('modello').value = car.modello;
+            document.getElementById('tipo').value = car.tipo;
+            document.getElementById('anno').value = car.anno;
+            document.getElementById('km').value = car.km;
+            document.getElementById('carburante').value = car.carburante;
+            document.getElementById('prezzo').value = car.prezzo;
+            document.getElementById('cv').value = car.cv;
+            document.getElementById('cambio').value = car.cambio;
+            document.getElementById('posti').value = car.posti;
+            document.getElementById('garantita').value = car.garantita;
+            document.getElementById('descrizione').value = car.descrizione || '';
+            
+            currentImages = car.images;
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = car.images.map((img, i) => `
+                <div class="preview-item">
+                    <div class="number">${i + 1}</div>
+                    <img src="${img}">
+                    <button class="remove" onclick="removeImage(${i})">×</button>
+                </div>
+            `).join('');
+            
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function deleteCar(id) {
+            if (!confirm('Eliminare questa auto?')) return;
+            let cars = getCars();
+            cars = cars.filter(c => c.id !== id);
+            saveCars(cars);
+            alert('Auto eliminata!');
+            loadCars();
+        }
+        
+        checkAuth();
+    </script>
+</body>
+</html>
