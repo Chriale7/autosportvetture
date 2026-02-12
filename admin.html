@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannello Admin - Autosport</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-body {
+            background: #f3f4f6;
+            min-height: 100vh;
+        }
+        
+        .admin-header {
+            background: #1f2937;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-title {
+            font-size: 1.5em;
+            margin: 0;
+        }
+        
+        .logout-btn {
+            background: #ef4444;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+        
+        .admin-container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .admin-actions {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .add-car-btn {
+            background: #10b981;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .add-car-btn:hover {
+            background: #059669;
+        }
+        
+        .cars-list {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .car-item {
+            display: grid;
+            grid-template-columns: 100px 1fr auto;
+            gap: 20px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .car-item:hover {
+            background: #f9fafb;
+        }
+        
+        .car-thumb {
+            width: 100px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+        }
+        
+        .car-details h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.2em;
+            color: #1f2937;
+        }
+        
+        .car-details p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 0.9em;
+        }
+        
+        .car-price {
+            color: #2563eb;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-top: 5px;
+        }
+        
+        .car-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-edit {
+            background: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-edit:hover {
+            background: #2563eb;
+        }
+        
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-delete:hover {
+            background: #dc2626;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #1f2937;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            color: #6b7280;
+        }
+        
+        .close-modal:hover {
+            color: #1f2937;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .form-grid .form-group {
+            margin-bottom: 0;
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1f2937;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2563eb;
+        }
+        
+        .stat-label {
+            color: #6b7280;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="admin-body">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <h2>🔐 Login Admin</h2>
+            <form id="loginForm" onsubmit="return handleLoginInline(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" required placeholder="admin">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">
+                    Accedi
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" style="display: none;">
+        <header class="admin-header">
+            <div class="container">
+                <h1 class="admin-title">🏎️ Pannello Admin Autosport</h1>
+                <div>
+                    <a href="index.html" class="btn btn-secondary" style="margin-right: 10px;">← Torna al Sito</a>
+                    <button class="logout-btn" onclick="logout()">🚪 Esci</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="admin-container">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalCars">0</div>
+                    <div class="stat-label">Auto Totali</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avgPrice">€0</div>
+                    <div class="stat-label">Prezzo Medio</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="newestYear">2024</div>
+                    <div class="stat-label">Anno Più Recente</div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="admin-actions">
+                <button class="add-car-btn" onclick="openAddCarModal()">
+                    <span>➕</span> Aggiungi Nuova Auto
+                </button>
+            </div>
+
+            <!-- Cars List -->
+            <div class="cars-list">
+                <h3 style="margin-bottom: 20px;">📋 Le Tue Auto</h3>
+                <div id="adminCarsList">
+                    <!-- Le auto appariranno qui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Add/Edit Car -->
+    <div id="carModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">➕ Aggiungi Auto</h2>
+                <button class="close-modal" onclick="closeCarModal()">×</button>
+            </div>
+            
+            <form id="carForm" onsubmit="saveCar(event)">
+                <input type="hidden" id="editCarId">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Marca *</label>
+                        <input type="text" id="carMarca" required placeholder="Es: BMW">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Modello *</label>
+                        <input type="text" id="carModello" required placeholder="Es: Serie 3">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tipo Auto *</label>
+                        <select id="carTipo" required>
+                            <option value="">Seleziona tipo</option>
+                            <option value="berlina">Berlina</option>
+                            <option value="suv">SUV</option>
+                            <option value="citycar">City Car</option>
+                            <option value="station">Station Wagon</option>
+                            <option value="sportiva">Sportiva</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Anno *</label>
+                        <input type="number" id="carAnno" required placeholder="2023" min="1980" max="2025">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Chilometri *</label>
+                        <input type="number" id="carKm" required placeholder="25000" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Carburante *</label>
+                        <select id="carCarburante" required>
+                            <option value="">Seleziona</option>
+                            <option value="benzina">Benzina</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="ibrida">Ibrida</option>
+                            <option value="elettrica">Elettrica</option>
+                            <option value="gpl">GPL</option>
+                            <option value="metano">Metano</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Prezzo (€) *</label>
+                        <input type="number" id="carPrezzo" required placeholder="25990" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Potenza (CV) *</label>
+                        <input type="number" id="carCv" required placeholder="150" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Cambio *</label>
+                        <select id="carCambio" required>
+                            <option value="">Seleziona</option>
+                            <option value="Manuale">Manuale</option>
+                            <option value="Automatico">Automatico</option>
+                            <option value="Semiautomatico">Semiautomatico</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>N° Posti *</label>
+                        <input type="number" id="carPosti" required placeholder="5" min="2" max="9">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Garantita</label>
+                        <select id="carGarantita">
+                            <option value="true">Sì</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Foto Auto *</label>
+                        <input type="file" id="carImages" accept="image/*" multiple onchange="handleImageUpload(event)">
+                        <p style="font-size: 0.85em; color: #6b7280; margin-top: 5px;">
+                            💡 Seleziona le foto (Ctrl+Click per più foto insieme)<br>
+                            🔄 <strong>Trascina le foto</strong> per riordinarle - La prima è la copertina!
+                        </p>
+                        <div id="imagesPreview" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px;">
+                            <!-- Preview images will appear here -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Descrizione (opzionale)</label>
+                        <textarea id="carDescrizione" rows="4" placeholder="Descrivi l'auto, optional, condizioni..."></textarea>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn btn-secondary" onclick="closeCarModal()">
+                        Annulla
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        💾 Salva Auto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+    <script>
+        // Inline login handler - works immediately
+        function handleLoginInline(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === 'admin' && password === 'autosport2024') {
+                localStorage.setItem('adminLoggedIn', 'true');
+                
+                // Hide login, show panel
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                
+                // Initialize DB and load cars
+                initDB().then(() => {
+                    loadAdminCars();
+                    updateStats();
+                }).catch(err => {
+                    console.error('Error:', err);
+                });
+            } else {
+                alert('Username o password errati!');
+            }
+            
+            return false;
+        }
+    </script>
+</body>
+</html>
