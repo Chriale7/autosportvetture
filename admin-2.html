@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Autosport</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { margin: 0; font-family: -apple-system, sans-serif; background: #f3f4f6; }
+        .admin-header { background: #1f2937; color: white; padding: 20px; margin-bottom: 20px; }
+        .admin-header h1 { margin: 0; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .btn-add { background: #10b981; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 1.1em; cursor: pointer; margin-bottom: 20px; }
+        .btn-add:hover { background: #059669; }
+        .btn-download { background: #f59e0b; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 1.1em; cursor: pointer; margin-bottom: 20px; margin-left: 10px; }
+        .cars-grid { display: grid; gap: 20px; }
+        .car-item { background: white; padding: 20px; border-radius: 10px; display: flex; gap: 20px; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .car-thumb { width: 150px; height: 100px; background: #ddd; border-radius: 8px; background-size: cover; background-position: center; flex-shrink: 0; }
+        .car-info { flex: 1; }
+        .car-info h3 { margin: 0 0 10px 0; }
+        .car-actions { display: flex; gap: 10px; flex-direction: column; }
+        .btn-edit, .btn-delete { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-edit { background: #3b82f6; color: white; }
+        .btn-delete { background: #ef4444; color: white; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; }
+        .modal.active { display: flex; align-items: center; justify-content: center; }
+        .modal-content { background: white; padding: 30px; border-radius: 15px; max-width: 900px; width: 95%; max-height: 90vh; overflow-y: auto; }
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #374151; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 5px; font-size: 14px; }
+        .full-width { grid-column: 1 / -1; }
+        .images-preview { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; margin-top: 15px; }
+        .preview-item { position: relative; border: 2px solid #e5e7eb; border-radius: 8px; cursor: move; }
+        .preview-item img { width: 100%; height: 100px; object-fit: cover; border-radius: 6px; display: block; }
+        .preview-item .number { position: absolute; top: 5px; left: 5px; background: #2563eb; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 13px; z-index: 2; }
+        .preview-item .remove { position: absolute; top: 5px; right: 5px; background: #ef4444; color: white; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; font-size: 18px; z-index: 2; }
+        .notification { position: fixed; top: 20px; right: 20px; padding: 15px 25px; background: #10b981; color: white; border-radius: 8px; z-index: 2000; animation: slideIn 0.3s; }
+        @keyframes slideIn { from { transform: translateX(400px); } to { transform: translateX(0); } }
+        .instructions { background: #eff6ff; border: 2px solid #3b82f6; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
+        .instructions h3 { margin-top: 0; color: #1e40af; }
+        .instructions ol { margin: 10px 0; }
+        .instructions li { margin: 8px 0; }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <div class="container">
+            <h1>🏎️ Pannello Admin Autosport</h1>
+            <p style="margin: 10px 0 0 0; opacity: 0.8;">Gestisci le auto - Tutti le vedranno online!</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="instructions">
+            <h3>📋 Come Funziona:</h3>
+            <ol>
+                <li>Aggiungi/Modifica le auto qui sotto</li>
+                <li>Click <strong>"📥 Scarica cars.json"</strong></li>
+                <li>Vai su GitHub → Upload il file <code>cars.json</code></li>
+                <li><strong>TUTTI vedranno le auto sul sito!</strong> ✅</li>
+            </ol>
+        </div>
+        
+        <button class="btn-add" onclick="openModal()">➕ Aggiungi Nuova Auto</button>
+        <button class="btn-download" onclick="downloadJSON()">📥 Scarica cars.json</button>
+        
+        <div id="carsList" class="cars-grid"></div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Aggiungi Auto</h2>
+            <form onsubmit="return saveCar(event)">
+                <input type="hidden" id="editId">
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Marca *</label>
+                        <input type="text" id="marca" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Modello *</label>
+                        <input type="text" id="modello" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo *</label>
+                        <select id="tipo" required>
+                            <option value="">Seleziona</option>
+                            <option value="berlina">Berlina</option>
+                            <option value="suv">SUV</option>
+                            <option value="citycar">City Car</option>
+                            <option value="station">Station Wagon</option>
+                            <option value="sportiva">Sportiva</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Anno *</label>
+                        <input type="number" id="anno" required min="1980" max="2030">
+                    </div>
+                    <div class="form-group">
+                        <label>Kilometri *</label>
+                        <input type="number" id="km" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Carburante *</label>
+                        <select id="carburante" required>
+                            <option value="">Seleziona</option>
+                            <option value="benzina">Benzina</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="ibrida">Ibrida</option>
+                            <option value="elettrica">Elettrica</option>
+                            <option value="gpl">GPL</option>
+                            <option value="metano">Metano</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Prezzo (€) *</label>
+                        <input type="number" id="prezzo" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Potenza (CV) *</label>
+                        <input type="number" id="cv" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Cambio *</label>
+                        <select id="cambio" required>
+                            <option value="">Seleziona</option>
+                            <option value="Manuale">Manuale</option>
+                            <option value="Automatico">Automatico</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Posti *</label>
+                        <input type="number" id="posti" required min="2" max="9">
+                    </div>
+                    <div class="form-group">
+                        <label>Garantita</label>
+                        <select id="garantita">
+                            <option value="true">Sì</option>
+                            <option value="false">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Foto Auto *</label>
+                        <input type="file" id="images" accept="image/*" multiple onchange="handleImages(event)">
+                        <p style="font-size: 0.85em; color: #6b7280; margin-top: 5px;">
+                            💡 Seleziona tutte le foto (Ctrl+Click)<br>
+                            🔄 Trascina per riordinarle - Prima foto = copertina!
+                        </p>
+                        <div id="imagesPreview" class="images-preview"></div>
+                    </div>
+                    
+                    <div class="form-group full-width">
+                        <label>Descrizione (ILLIMITATA)</label>
+                        <textarea id="descrizione" rows="10" placeholder="Scrivi quanto vuoi... nessun limite di caratteri!"></textarea>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 25px; text-align: right; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" onclick="closeModal()" style="padding: 12px 24px; background: #6b7280; color: white; border: none; border-radius: 5px; cursor: pointer;">Annulla</button>
+                    <button type="submit" class="btn-add">💾 Salva Auto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let currentImages = [];
+        let draggedIndex = null;
+        let cars = [];
+        
+        // Load from localStorage on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            cars = JSON.parse(localStorage.getItem('autosport_cars_temp') || '[]');
+            loadCars();
+        });
+        
+        function saveCarsLocal() {
+            localStorage.setItem('autosport_cars_temp', JSON.stringify(cars));
+        }
+        
+        function loadCars() {
+            const list = document.getElementById('carsList');
+            
+            if (cars.length === 0) {
+                list.innerHTML = '<div style="text-align: center; padding: 60px; background: white; border-radius: 10px;"><h3>📭 Nessuna auto</h3><p>Clicca "Aggiungi Nuova Auto"</p></div>';
+                return;
+            }
+            
+            list.innerHTML = cars.map(car => `
+                <div class="car-item">
+                    <div class="car-thumb" style="background-image: url('${car.images && car.images[0] ? car.images[0] : ''}')"></div>
+                    <div class="car-info">
+                        <h3>${car.marca.toUpperCase()} ${car.modello}</h3>
+                        <p style="color: #6b7280; margin: 5px 0;">
+                            ${car.anno} • ${car.km.toLocaleString()} km • €${car.prezzo.toLocaleString()}<br>
+                            ${car.images ? car.images.length : 0} foto
+                        </p>
+                    </div>
+                    <div class="car-actions">
+                        <button class="btn-edit" onclick="editCar(${car.id})">✏️ Modifica</button>
+                        <button class="btn-delete" onclick="deleteCar(${car.id})">🗑️ Elimina</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function handleImages(event) {
+            const files = event.target.files;
+            let processed = 0;
+            const total = files.length;
+            
+            document.getElementById('imagesPreview').innerHTML = '<p style="padding: 20px; text-align: center;">📸 Caricamento ' + total + ' foto...</p>';
+            
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        let width = img.width;
+                        let height = img.height;
+                        const maxSize = 800;
+                        
+                        if (width > height && width > maxSize) {
+                            height = (height * maxSize) / width;
+                            width = maxSize;
+                        } else if (height > maxSize) {
+                            width = (width * maxSize) / height;
+                            height = maxSize;
+                        }
+                        
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        const compressed = canvas.toDataURL('image/jpeg', 0.6);
+                        currentImages.push(compressed);
+                        
+                        processed++;
+                        
+                        if (processed === total) {
+                            renderPreviews();
+                        } else {
+                            document.getElementById('imagesPreview').innerHTML = '<p style="padding: 20px; text-align: center;">📸 ' + processed + '/' + total + ' foto...</p>';
+                        }
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function renderPreviews() {
+            const container = document.getElementById('imagesPreview');
+            container.innerHTML = '';
+            
+            currentImages.forEach((img, index) => {
+                const item = document.createElement('div');
+                item.className = 'preview-item';
+                item.draggable = true;
+                item.dataset.index = index;
+                
+                item.ondragstart = (e) => {
+                    draggedIndex = index;
+                    e.target.style.opacity = '0.5';
+                };
+                
+                item.ondragend = (e) => {
+                    e.target.style.opacity = '1';
+                };
+                
+                item.ondragover = (e) => {
+                    e.preventDefault();
+                };
+                
+                item.ondrop = (e) => {
+                    e.preventDefault();
+                    const dropIndex = parseInt(e.currentTarget.dataset.index);
+                    if (draggedIndex !== null && draggedIndex !== dropIndex) {
+                        const temp = currentImages[draggedIndex];
+                        currentImages.splice(draggedIndex, 1);
+                        currentImages.splice(dropIndex, 0, temp);
+                        renderPreviews();
+                    }
+                };
+                
+                item.innerHTML = `
+                    <div class="number">${index + 1}</div>
+                    <img src="${img}">
+                    <button class="remove" onclick="removeImage(${index}); event.stopPropagation();">×</button>
+                `;
+                
+                container.appendChild(item);
+            });
+        }
+        
+        function removeImage(index) {
+            currentImages.splice(index, 1);
+            renderPreviews();
+        }
+        
+        function openModal() {
+            document.getElementById('modalTitle').textContent = 'Aggiungi Auto';
+            document.getElementById('editId').value = '';
+            document.querySelector('form').reset();
+            currentImages = [];
+            document.getElementById('imagesPreview').innerHTML = '';
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+        
+        function saveCar(e) {
+            e.preventDefault();
+            
+            if (currentImages.length === 0) {
+                alert('Carica almeno una foto!');
+                return false;
+            }
+            
+            const editId = document.getElementById('editId').value;
+            
+            const car = {
+                id: editId ? parseInt(editId) : Date.now(),
+                marca: document.getElementById('marca').value.toLowerCase(),
+                modello: document.getElementById('modello').value,
+                tipo: document.getElementById('tipo').value,
+                anno: parseInt(document.getElementById('anno').value),
+                km: parseInt(document.getElementById('km').value),
+                carburante: document.getElementById('carburante').value,
+                prezzo: parseInt(document.getElementById('prezzo').value),
+                cv: parseInt(document.getElementById('cv').value),
+                cambio: document.getElementById('cambio').value,
+                posti: parseInt(document.getElementById('posti').value),
+                garantita: document.getElementById('garantita').value === 'true',
+                descrizione: document.getElementById('descrizione').value,
+                images: currentImages
+            };
+            
+            if (editId) {
+                const index = cars.findIndex(c => c.id === parseInt(editId));
+                cars[index] = car;
+                notify('Auto modificata!');
+            } else {
+                cars.push(car);
+                notify('Auto aggiunta!');
+            }
+            
+            saveCarsLocal();
+            closeModal();
+            loadCars();
+            return false;
+        }
+        
+        function editCar(id) {
+            const car = cars.find(c => c.id === id);
+            if (!car) return;
+            
+            document.getElementById('modalTitle').textContent = 'Modifica Auto';
+            document.getElementById('editId').value = car.id;
+            document.getElementById('marca').value = car.marca;
+            document.getElementById('modello').value = car.modello;
+            document.getElementById('tipo').value = car.tipo;
+            document.getElementById('anno').value = car.anno;
+            document.getElementById('km').value = car.km;
+            document.getElementById('carburante').value = car.carburante;
+            document.getElementById('prezzo').value = car.prezzo;
+            document.getElementById('cv').value = car.cv;
+            document.getElementById('cambio').value = car.cambio;
+            document.getElementById('posti').value = car.posti;
+            document.getElementById('garantita').value = car.garantita;
+            document.getElementById('descrizione').value = car.descrizione || '';
+            
+            currentImages = car.images || [];
+            renderPreviews();
+            
+            document.getElementById('modal').classList.add('active');
+        }
+        
+        function deleteCar(id) {
+            if (!confirm('Eliminare questa auto?')) return;
+            
+            cars = cars.filter(c => c.id !== id);
+            saveCarsLocal();
+            notify('Auto eliminata!');
+            loadCars();
+        }
+        
+        function downloadJSON() {
+            if (cars.length === 0) {
+                alert('Nessuna auto da salvare!');
+                return;
+            }
+            
+            const json = JSON.stringify(cars, null, 2);
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cars.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            notify('📥 File cars.json scaricato! Caricalo su GitHub!');
+        }
+        
+        function notify(msg) {
+            const n = document.createElement('div');
+            n.className = 'notification';
+            n.textContent = msg;
+            document.body.appendChild(n);
+            setTimeout(() => n.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
