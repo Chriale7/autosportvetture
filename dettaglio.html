@@ -49,6 +49,47 @@
             background-position: center;
             border-radius: 0;
             margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 10;
+            touch-action: manipulation;
+        }
+        
+        .nav-arrow:hover {
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .nav-arrow.prev {
+            left: 10px;
+        }
+        
+        .nav-arrow.next {
+            right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
         }
         
         .thumbnails {
@@ -212,7 +253,10 @@
         <div class="detail-grid">
             <!-- Gallery Section -->
             <div class="gallery-section">
-                <div id="mainImage" class="main-image"></div>
+                <div id="mainImage" class="main-image">
+                    <button class="nav-arrow prev" onclick="prevImage()">‹</button>
+                    <button class="nav-arrow next" onclick="nextImage()">›</button>
+                </div>
                 <div id="thumbnails" class="thumbnails"></div>
                 
                 <!-- Description under photos -->

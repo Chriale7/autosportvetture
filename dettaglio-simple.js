@@ -1,6 +1,8 @@
 // Dettaglio - Legge da cars.json
 
 const carId = parseInt(new URLSearchParams(window.location.search).get('id'));
+let currentImageIndex = 0;
+let allImages = [];
 
 async function loadCarDetail() {
     try {
@@ -34,6 +36,8 @@ async function loadCarDetail() {
         const thumbs = document.getElementById('thumbnails');
         
         if (car.images && car.images.length > 0) {
+            allImages = car.images;
+            currentImageIndex = 0;
             mainImg.style.backgroundImage = `url('${car.images[0]}')`;
             
             car.images.forEach((img, i) => {
@@ -41,6 +45,7 @@ async function loadCarDetail() {
                 t.className = 'thumbnail' + (i === 0 ? ' active' : '');
                 t.style.backgroundImage = `url('${img}')`;
                 t.onclick = () => {
+                    currentImageIndex = i;
                     mainImg.style.backgroundImage = `url('${img}')`;
                     document.querySelectorAll('.thumbnail').forEach(x => x.classList.remove('active'));
                     t.classList.add('active');
@@ -85,6 +90,33 @@ function capitalizeFirst(str) {
 
 function contactAboutThisCar() {
     window.open(`https://wa.me/393400024151?text=${encodeURIComponent('Ciao! Sono interessato a questa auto')}`, '_blank');
+}
+
+function prevImage() {
+    if (allImages.length === 0) return;
+    currentImageIndex = (currentImageIndex - 1 + allImages.length) % allImages.length;
+    updateMainImage();
+}
+
+function nextImage() {
+    if (allImages.length === 0) return;
+    currentImageIndex = (currentImageIndex + 1) % allImages.length;
+    updateMainImage();
+}
+
+function updateMainImage() {
+    const mainImg = document.getElementById('mainImage');
+    mainImg.style.backgroundImage = `url('${allImages[currentImageIndex]}')`;
+    
+    // Update active thumbnail
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach((t, i) => {
+        if (i === currentImageIndex) {
+            t.classList.add('active');
+        } else {
+            t.classList.remove('active');
+        }
+    });
 }
 
 loadCarDetail();
