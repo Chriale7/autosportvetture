@@ -116,3 +116,21 @@
     ]
   }
 ]
+ {
+    "id": 1771852832804,
+    "marca": "audi",
+    "modello": "Q2 QUATTRO",
+    "tipo": "Suv",
+    "anno": 2025,
+    "km": 8700,
+    "carburante": "benzina",
+    "prezzo": 39990,
+    "cv": 190,
+    "cambio": "Automatico",
+    "posti": 5,
+    "garantita": true,
+    "descrizione": "",
+    "images": [
+      "images/auto/inarrivo-1.jpg"
+    ]
+  }
