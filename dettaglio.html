@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W23LKE5NQ4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-W23LKE5NQ4');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettaglio Auto - Autosport</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .detail-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 600;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        
+        .back-btn:hover {
+            background: #e5e7eb;
+        }
+        
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        .gallery-section {
+            padding: 30px;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 500px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 0;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+            z-index: 10;
+            touch-action: manipulation;
+        }
+        
+        .nav-arrow:hover {
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .nav-arrow.prev {
+            left: 10px;
+        }
+        
+        .nav-arrow.next {
+            right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 18px;
+            }
+        }
+        
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+        }
+        
+        .thumbnail {
+            width: 100%;
+            height: 80px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 0;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .thumbnail:hover,
+        .thumbnail.active {
+            border-color: #2563eb;
+        }
+        
+        .info-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .car-title-detail {
+            font-size: 2em;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+        
+        .car-price-detail {
+            font-size: 2.5em;
+            color: #2563eb;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .spec-item {
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+        
+        .spec-label {
+            font-size: 0.85em;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+        
+        .spec-value {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .description-box {
+            background: #f9fafb;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            margin-top: 30px;
+        }
+        
+        .description-box h4 {
+            color: #1f2937;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .description-box p {
+            color: #4b5563;
+            line-height: 1.7;
+            white-space: pre-wrap;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        @media (max-width: 992px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-image {
+                height: 300px;
+                background-size: contain;
+            }
+            
+            .gallery-section {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-image {
+                height: 250px;
+                background-size: contain;
+            }
+            
+            .thumbnail {
+                height: 60px;
+                background-size: contain;
+            }
+            
+            .gallery-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <a href="mailto:autosportvetture@gmail.com" class="contact-item">
+                        <span>✉️</span> autosportvetture@gmail.com
+                    </a>
+                    <a href="tel:+390399686292" class="contact-item">
+                        <span>📞</span> 039 968 6292
+                    </a>
+                    <a href="tel:+393400024151" class="contact-item">
+                        <span>📱</span> 340 002 4151
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <img src="logo.png" alt="Autosport" style="height: 60px;">
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="detail-container">
+        <a href="index.html" class="back-btn">← Torna alle Auto</a>
+        
+        <div class="detail-grid">
+            <!-- Gallery Section -->
+            <div class="gallery-section">
+                <div id="mainImage" class="main-image">
+                    <button class="nav-arrow prev" onclick="prevImage()">‹</button>
+                    <button class="nav-arrow next" onclick="nextImage()">›</button>
+                </div>
+                <div id="thumbnails" class="thumbnails"></div>
+                
+                <!-- Description under photos -->
+                <div class="description-box" id="descriptionBox" style="display: none;">
+                    <h4>📝 Descrizione</h4>
+                    <p id="carDescription"></p>
+                </div>
+            </div>
+            
+            <!-- Info Section -->
+            <div class="info-section">
+                <h1 class="car-title-detail" id="carTitle"></h1>
+                <div class="car-price-detail" id="carPrice"></div>
+                
+                <div class="specs-grid" id="specsGrid"></div>
+                
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-large" onclick="contactAboutThisCar()">
+                        <img src="whatsapp-logo.jpg" alt="WhatsApp" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 8px; border-radius: 4px;"> WhatsApp
+                    </button>
+                    <a href="tel:+390399686292" class="btn btn-secondary btn-large">
+                        📞 Chiama Ora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 60px;">
+        <div class="container">
+            <div class="footer-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <!-- Contact Info -->
+                <div class="footer-col">
+                    <h4>📍 Contatti</h4>
+                    <p style="line-height: 1.8;">
+                        <strong>Via Graziano Oltolini 23, 23899 Robbiate (LC)</strong><br>
+                        📧 autosportvetture@gmail.com<br>
+                        📞 039 968 6292<br>
+                        📱 340 002 4151
+                    </p>
+                </div>
+                
+                <!-- Certificate -->
+                <div class="footer-col">
+                    <h4>Certificazioni</h4>
+                    <img src="attestato-autoscout24.jpg" alt="Attestato di Eccellenza AutoScout24 2025" style="width: 100%; max-height: 250px; object-fit: contain; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Autosport - Tutti i diritti riservati</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Mobile: certificate above contacts */
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+            
+            /* Certificate first on mobile */
+            .footer-col:nth-child(2) {
+                order: -1;
+            }
+        }
+    </style>
+
+    <script src="dettaglio-simple.js"></script>
+</body>
+</html>
