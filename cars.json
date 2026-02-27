@@ -182,7 +182,6 @@
     "descrizione": "TT in edizione limitata \"20 Years\"\nCambio automatico S-tronic\nTrazione QUATTRO",
     "images": [
       "images/auto/TT-1.jpg",
-      "images/auto/TT-2.jpg",
       "images/auto/TT-3.jpg",
       "images/auto/TT-4.jpg",
       "images/auto/TT-5.jpg",
@@ -191,12 +190,15 @@
       "images/auto/TT-8.jpg",
       "images/auto/TT-9.jpg",
       "images/auto/TT-10.jpg",
-      "images/auto/TT-11.jpg",
       "images/auto/TT-12.jpg",
       "images/auto/TT-13.jpg",
-      "images/auto/TT-14.jpg",
       "images/auto/TT-15.jpg",
-      "images/auto/TT-16.jpg"
+      "images/auto/TT-16.jpg",
+      "images/auto/TT-17.jpg",
+      "images/auto/TT-18.jpg",
+      "images/auto/TT-19.jpg",
+      "images/auto/TT-20.jpg",
+      "images/auto/TT-21.jpg"
     ]
   }
 ]
