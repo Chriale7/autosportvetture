@@ -11,7 +11,7 @@
     "cv": 245,
     "cambio": "Automatico",
     "posti": 5,
-    "garantita": UFFICIALE,
+    "garantita": true,
     "descrizione": "Garanzia ufficiale Volkswagen fino al 2029",
     "images": [
       "images/g-1.jpg",
