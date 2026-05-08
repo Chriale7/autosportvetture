@@ -4,8 +4,8 @@
     "marca": "Fiat",
     "modello": "500 Hybrid",
     "tipo": "citycar",
-    "anno": 2021,
-    "km": 125000,
+    "anno": 2022,
+    "km": 105000,
     "carburante": "ibrida",
     "prezzo": 9490,
     "cv": 70,
@@ -14,16 +14,7 @@
     "garantita": true,
     "descrizione": "VETTURA IN PREPARARAZIONE\nUnico proprietario\nAllestimento Connect\nGaranzia di 12 mesi inclusa nel prezzo",
     "images": [
-      "images/f1.jpg",
-      "images/2.jpg",
-      "images/f3.jpg",
-      "images/f4.jpg",
-      "images/f5.jpg",
-      "images/f6.jpg",
-      "images/f7.jpg",
-      "images/f8.jpg",
-      "images/f9.jpg",
-      "images/f10.jpg"  
+      "images/inarrivo-1.jpg"  
     ]
   },
   {
