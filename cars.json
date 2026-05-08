@@ -42,7 +42,6 @@
     "descrizione": "Vettura full optional, 4x4 cambio automatico",
     "images": [
       "images/o-1.jpg",
-      "images/o-2.jpg",
       "images/o-3.jpg",
       "images/o-4.jpg",
       "images/o-5.jpg",
@@ -52,7 +51,8 @@
       "images/o-9.jpg",
       "images/o-10.jpg",
       "images/o-11.jpg",
-      "images/o-12.jpg"
+      "images/o-12.jpg",
+      "images/o-13.jpg"
     ]
   },
   {
