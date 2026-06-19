@@ -78,10 +78,9 @@
     "garantita": true,
     "descrizione": "Vettura full optional, garanzia 5 anni/100.000 km ufficiale AUDI",
     "images": [
-      "images/o-1a1.jpg",
-      "images/o-1a2.jpg",
-      "images/o-1a3.jpg",
-      "images/o-1a4.jpg",
+      "images/o-1.jpg",
+      "images/o-2.jpg",
+      "images/o-3.jpg",
       "images/o-4.jpg",
       "images/o-5.jpg",
       "images/o-6.jpg",
@@ -92,8 +91,7 @@
       "images/o-11.jpg",
       "images/o-12.jpg",
       "images/o-13.jpg",
-      "images/o-14.jpg",
-      "images/o-15.jpg"
+      "images/o-14.jpg"
     ]
   },
   {
