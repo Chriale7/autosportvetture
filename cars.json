@@ -53,38 +53,6 @@
     ]
   },
   {
-    "id": 1771373579875,
-    "marca": "volkswagen",
-    "modello": "GOLF 1.4 DsG solo 13.000 km",
-    "tipo": "berlina",
-    "anno": 2016,
-    "km": 13000,
-    "carburante": "benzina",
-    "prezzo": 16900,
-    "cv": 125,
-    "cambio": "Automatico",
-    "posti": 5,
-    "garantita": true,
-    "descrizione": "Volkswagen Golf Highline cambio automatico DsG SOLO 13900 CHILOMATRI.\n\n\nPARI AL NUOVO - UNICO PROPRIETARIO ultra ottantenne - TAGLIANDI UFFICIALI VOLKSWAGEN effettuati ogni anno nonostante l'irrisorio chilometraggio.\n\nQUOTAZIONE UFFICIALE BASATA SUL TELAIO E CHILOMETRAGGIO DI EURO 19.900, NOSTRA PROPOSTA DI 16.900€\n\nDOTAZIONI PRINCIPALI: \n• Cruise Control \n• Navigatore\n• Climatizzatore \n• Bluetooth \n• USB \n• AUX-IN \n• Comandi vocali \n• Comandi al volante \n• Vetri elettrici \n• Specchi retrovisori regolabili elettricamente \n• Sistema ISOFIX \n• Cerchi in lega \n-Visionabile esclusivamente su appuntamento presso le nostre sedi di Carvico o Robbiate. \n-Possibilità di finanziamento personalizzato anche senza anticipo -Valutiamo eventuali permute \n-Passaggio di proprietà escluso e a carico dell'acquirente. ",
-    "images": [
-      "images/auto/volkswagen-golf-1784706580112-0.jpg",
-      "images/auto/volkswagen-golf-1784706584040-1.jpg",
-      "images/auto/volkswagen-golf-1784706587824-2.jpg",
-      "images/auto/volkswagen-golf-1784706591305-3.jpg",
-      "images/auto/volkswagen-golf-1784706612876-9.jpg",
-      "images/auto/volkswagen-golf-1784706630199-14.jpg",
-      "images/auto/volkswagen-golf-1784706594996-4.jpg",
-      "images/auto/volkswagen-golf-1784706598131-5.jpg",
-      "images/auto/volkswagen-golf-1784706609323-8.jpg",
-      "images/auto/volkswagen-golf-1784706601343-6.jpg",
-      "images/auto/volkswagen-golf-1784706620031-11.jpg",
-      "images/auto/volkswagen-golf-1784706615158-10.jpg",
-      "images/auto/volkswagen-golf-1784706623409-12.jpg",
-      "images/auto/volkswagen-golf-1784706605480-7.jpg",
-      "images/auto/volkswagen-golf-1784706626516-13.jpg"
-    ]
-  },
-  {
     "id": 1771852741479,
     "marca": "fiat",
     "modello": "500 Hybrid",
@@ -282,40 +250,6 @@
       "images/TT-19.jpg",
       "images/TT-20.jpg",
       "images/TT-21.jpg"
-    ]
-  },
-  {
-    "id": 1771373579875,
-    "marca": "volkswagen",
-    "modello": "Golf GTI edition 45",
-    "tipo": "berlina",
-    "anno": 2020,
-    "km": 13000,
-    "carburante": "benzina",
-    "prezzo": 49900,
-    "cv": 300,
-    "cambio": "Automatico",
-    "posti": 5,
-    "garantita": true,
-    "descrizione": "Edition 45 - Scarichi akrapovic - Badge 45 sulle fiancate e sul volante - rimosso il limitatore di velocità",
-    "images": [
-      "images/45-1.jpg",
-      "images/45-2.jpg",
-      "images/45-3.jpg",
-      "images/45-4.jpg",
-      "images/45-5.jpg",
-      "images/45-6.jpg",
-      "images/45-7.jpg",
-      "images/45-8.jpg",
-      "images/45-9.jpg",
-      "images/45-10.jpg",
-      "images/45-11.jpg",
-      "images/45-12.jpg",
-      "images/45-13.jpg",
-      "images/45-14.jpg",
-      "images/45-15.jpg",
-      "images/45-16.jpg",
-      "images/45-17.jpg"
     ]
   }
 ]
