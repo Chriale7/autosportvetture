@@ -29,6 +29,30 @@
     ]
   },
   {
+    "id": 1778359464409,
+    "marca": "volkswagen",
+    "modello": "T-roc 4motion ",
+    "tipo": "citycar",
+    "anno": 2018,
+    "km": 131000,
+    "carburante": "diesel",
+    "prezzo": 15990,
+    "cv": 150,
+    "cambio": "Manuale",
+    "posti": 5,
+    "garantita": true,
+    "descrizione": "#### AUTO IN PREPARAZIONE ####\n\nT-Roc 2.0 TDI 4x4 cambio manuale a 6 rapporti\n\n✅Unico proprietario\n\n✅Tagliandi documentati\n\n✅Garanzia di 12 mesi\n\n✅Nessun obbligo finanziario\n\nDOTAZIONI PRINCIPALI:\n\n• Cruise Control • Sensori di parcheggio • Climatizzatore • Bluetooth • USB • AUX-IN • Comandi vocali • Comandi al volante • Vetri elettrici • Specchi retrovisori regolabili elettricamente • Sistema ISOFIX • Cerchi in lega\n\n-Visionabile esclusivamente su appuntamento presso le nostre sedi di Carvico o Robbiate.\n\n-Possibilità di finanziamento personalizzato anche senza anticipo\n\n-Valutiamo eventuali permute\n\n-Passaggio di proprietà escluso e a carico dell'acquirente.\n\nPER RIMANERE AGGIORNATO SULLE NOSTRE VETTURE SEGUICI SU INSTAGRAM: autosport.vetture\n\n",
+    "images": [
+      "images/auto/ford-fiesta-titanium-1784678497922-0.jpg",
+      "images/auto/ford-fiesta-titanium-1784678501961-1.jpg",
+      "images/auto/ford-fiesta-titanium-1784678505446-2.jpg",
+      "images/auto/ford-fiesta-titanium-1784678508920-3.jpg",
+      "images/auto/ford-fiesta-titanium-1784678511595-4.jpg",
+      "images/auto/ford-fiesta-titanium-1784678514410-5.jpg",
+      "images/auto/ford-fiesta-titanium-1784678516910-6.jpg"
+    ]
+  },
+  {
     "id": 1778511652080,
     "marca": "volkswagen",
     "modello": "Golf GTI",
@@ -121,30 +145,6 @@
       "images/o-12.JPG",
       "images/o-13.JPG",
       "images/o-14.JPG"
-    ]
-  },
-  {
-    "id": 1778359464409,
-    "marca": "volkswagen",
-    "modello": "T-roc 4motion ",
-    "tipo": "citycar",
-    "anno": 2018,
-    "km": 131000,
-    "carburante": "diesel",
-    "prezzo": 15990,
-    "cv": 150,
-    "cambio": "Manuale",
-    "posti": 5,
-    "garantita": true,
-    "descrizione": "#### AUTO IN PREPARAZIONE ####\n\nT-Roc 2.0 TDI 4x4 cambio manuale a 6 rapporti\n\n✅Unico proprietario\n\n✅Tagliandi documentati\n\n✅Garanzia di 12 mesi\n\n✅Nessun obbligo finanziario\n\nDOTAZIONI PRINCIPALI:\n\n• Cruise Control • Sensori di parcheggio • Climatizzatore • Bluetooth • USB • AUX-IN • Comandi vocali • Comandi al volante • Vetri elettrici • Specchi retrovisori regolabili elettricamente • Sistema ISOFIX • Cerchi in lega\n\n-Visionabile esclusivamente su appuntamento presso le nostre sedi di Carvico o Robbiate.\n\n-Possibilità di finanziamento personalizzato anche senza anticipo\n\n-Valutiamo eventuali permute\n\n-Passaggio di proprietà escluso e a carico dell'acquirente.\n\nPER RIMANERE AGGIORNATO SULLE NOSTRE VETTURE SEGUICI SU INSTAGRAM: autosport.vetture\n\n",
-    "images": [
-      "images/auto/ford-fiesta-titanium-1784678497922-0.jpg",
-      "images/auto/ford-fiesta-titanium-1784678501961-1.jpg",
-      "images/auto/ford-fiesta-titanium-1784678505446-2.jpg",
-      "images/auto/ford-fiesta-titanium-1784678508920-3.jpg",
-      "images/auto/ford-fiesta-titanium-1784678511595-4.jpg",
-      "images/auto/ford-fiesta-titanium-1784678514410-5.jpg",
-      "images/auto/ford-fiesta-titanium-1784678516910-6.jpg"
     ]
   },
   {
