@@ -53,6 +53,38 @@
     ]
   },
   {
+    "id": 1784707664360,
+    "marca": "volksvagen",
+    "modello": "Golf 1.4 DsG solo 13.000 km",
+    "tipo": "berlina",
+    "anno": 2016,
+    "km": 13000,
+    "carburante": "benzina",
+    "prezzo": 16900,
+    "cv": 125,
+    "cambio": "Automatico",
+    "posti": 5,
+    "garantita": true,
+    "descrizione": "Volkswagen Golf Highline cambio automatico DsG SOLO 13900 CHILOMATRI.\n\n\nPARI AL NUOVO - UNICO PROPRIETARIO ultra ottantenne - TAGLIANDI UFFICIALI VOLKSWAGEN effettuati ogni anno nonostante l'irrisorio chilometraggio.\n\nQUOTAZIONE UFFICIALE BASATA SUL TELAIO E CHILOMETRAGGIO DI EURO 19.900, NOSTRA PROPOSTA DI 17.900€\n\nDOTAZIONI PRINCIPALI: \n• Cruise Control \n• Navigatore\n• Climatizzatore \n• Bluetooth \n• USB \n• AUX-IN \n• Comandi vocali \n• Comandi al volante \n• Vetri elettrici \n• Specchi retrovisori regolabili elettricamente \n• Sistema ISOFIX \n• Cerchi in lega \n-Visionabile esclusivamente su appuntamento presso le nostre sedi di Carvico o Robbiate. \n-Possibilità di finanziamento personalizzato anche senza anticipo -Valutiamo eventuali permute \n-Passaggio di proprietà escluso e a carico dell'acquirente. ",
+    "images": [
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707581186-0.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707585217-1.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707589576-2.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707593803-3.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707611024-9.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707614224-10.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707596698-4.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707599532-5.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707602436-6.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707607899-8.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707617808-11.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707620959-12.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707624490-13.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707605250-7.jpg",
+      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707627147-14.jpg"
+    ]
+  },
+  {
     "id": 1771852741479,
     "marca": "fiat",
     "modello": "500 Hybrid",
@@ -250,38 +282,6 @@
       "images/TT-19.jpg",
       "images/TT-20.jpg",
       "images/TT-21.jpg"
-    ]
-  },
-  {
-    "id": 1784707664360,
-    "marca": "volksvagen",
-    "modello": "Golf 1.4 DsG solo 13.000 km",
-    "tipo": "berlina",
-    "anno": 2016,
-    "km": 13000,
-    "carburante": "benzina",
-    "prezzo": 16900,
-    "cv": 125,
-    "cambio": "Automatico",
-    "posti": 5,
-    "garantita": true,
-    "descrizione": "Volkswagen Golf Highline cambio automatico DsG SOLO 13900 CHILOMATRI.\n\n\nPARI AL NUOVO - UNICO PROPRIETARIO ultra ottantenne - TAGLIANDI UFFICIALI VOLKSWAGEN effettuati ogni anno nonostante l'irrisorio chilometraggio.\n\nQUOTAZIONE UFFICIALE BASATA SUL TELAIO E CHILOMETRAGGIO DI EURO 19.900, NOSTRA PROPOSTA DI 17.900€\n\nDOTAZIONI PRINCIPALI: \n• Cruise Control \n• Navigatore\n• Climatizzatore \n• Bluetooth \n• USB \n• AUX-IN \n• Comandi vocali \n• Comandi al volante \n• Vetri elettrici \n• Specchi retrovisori regolabili elettricamente \n• Sistema ISOFIX \n• Cerchi in lega \n-Visionabile esclusivamente su appuntamento presso le nostre sedi di Carvico o Robbiate. \n-Possibilità di finanziamento personalizzato anche senza anticipo -Valutiamo eventuali permute \n-Passaggio di proprietà escluso e a carico dell'acquirente. ",
-    "images": [
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707581186-0.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707585217-1.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707589576-2.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707593803-3.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707611024-9.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707614224-10.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707596698-4.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707599532-5.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707602436-6.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707607899-8.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707617808-11.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707620959-12.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707624490-13.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707605250-7.jpg",
-      "images/auto/volksvagen-golf-1-4-dsg-solo-13-000-km-1784707627147-14.jpg"
     ]
   }
 ]
