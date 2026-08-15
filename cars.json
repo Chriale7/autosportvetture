@@ -96,6 +96,35 @@
     ]
   },
   {
+    "id": 1786780959408,
+    "marca": "porsche",
+    "modello": "CAYMAN 718 GT4",
+    "tipo": "sportiva",
+    "anno": 2022,
+    "km": 21000,
+    "carburante": "benzina",
+    "prezzo": 115900,
+    "cv": 420,
+    "cambio": "Automatico",
+    "posti": 2,
+    "garantita": true,
+    "descrizione": "PORSCHE 718 CAYMAN GT4\n\nInterni Alcantara\nLeva selettrice PDK in Alcantara\nLuci posteriori a LED oscurate\nCoprisedili anteriori, Alcantara/pelle/pelle\nSedile avvolgente 918 Spyder sinistro\nCintura a 6 punti conducente\nSedile avvolgente 918 Spyder destro\nricezione radio digitale (DAB)\nCintura passeggero a 6 punti\nDifferenziale a slittamento limitato 40%\nPreparazione del telefono cellulare\nFunzione Start/Stop\nControllo vocale\nPannello decorativo della porta in alluminio spazzolato\nEstintore\nInclinatore\nPannello consolle centrale in alluminio spazzolato\nCinture di sicurezza in rosso indiano\nImpianto di scarico sportivo, tubo di scarico nero\nPinza freno verniciata nera lucida\nModulo airbag in pelle\nInterni in pelle\nServosterzo\nPresa 12 Volt, lato passeggero, spazio per i piedi\nSirena di allarme\nPortabicchieri\nGabbia di sicurezza in nero\nAntifurto con sorveglianza interna\nRegolazione elettrica dell'ammortizzatore \"PASM\"\nSupporto dinamico del motore (PADM)\nBoxer a 6 cilindri 4,0l 309KW (Spyder/GT/4)\nCambio PDK (doppia frizione)\nQuadranti quadro strumenti in nero\nCronometro con quadranti in nero\nPacchetto sportivo del club\nImpianto di pulizia dei fari\nSensore pioggia\nPacchetto Sport Chrono Plus\nPacchetto audio 1 / Pacchetto sonoro\nControllo pressione pneumatici, RDK 433 Mhz\nVolante sportivo in Alcantara\nOrologio 12 ore rosso\nCielo Alcantara\nNavigatore High\nCodice regionale \"ECE\" per radio\nRadio Premium (Gen2)\npiantone dello sterzo regolabile meccanicamente in lunghezza e altezza\nPDLS+ abbaglianti dinamici\nClimatizzatore elettronico (High)\nFari principali a LED, luci di svolta dinamiche\nSpecchietto retrovisore interno auto-oscurante\nSerbatoio carburante 64 litri\nLuci diurne a LED\nPedaliera ottica sportiva\nPoggiapiedi sportivo\nPacchetto di sicurezza VTS (con PCC)\nRegolazione automatica della velocità\nPacchetto acustico RDW\nNorma sui gas di scarico, EU6 AP\nSpecchietti esterni ripiegabili manualmente, oscurabili automaticamente\nSpecchietto retrovisore interno auto-oscurante con sensore pioggia\nVetro specchietto esterno destro convesso\nMIRRORLINK (CARPLAY/GAL)\nBatteria 70 Ah\nCon il pacchetto connect 5\nPannello decorativo pannello di controllo alluminio\nAssistente di parcheggio posteriore e telecamera\nDue interfacce elettriche, USB/IPOD",
+    "images": [
+      "images/auto/porsche-cayman-gt4-1786780899827-0.jpg",
+      "images/auto/porsche-cayman-gt4-1786780903383-1.jpg",
+      "images/auto/porsche-cayman-gt4-1786780906082-2.jpg",
+      "images/auto/porsche-cayman-gt4-1786780909849-3.jpg",
+      "images/auto/porsche-cayman-gt4-1786780913136-4.jpg",
+      "images/auto/porsche-cayman-gt4-1786780916129-5.jpg",
+      "images/auto/porsche-cayman-gt4-1786780918679-6.jpg",
+      "images/auto/porsche-cayman-gt4-1786780920925-7.jpg",
+      "images/auto/porsche-cayman-gt4-1786780923445-8.jpg",
+      "images/auto/porsche-cayman-gt4-1786780925983-9.jpg",
+      "images/auto/porsche-cayman-gt4-1786780928536-10.jpg",
+      "images/auto/porsche-cayman-gt4-1786780931068-11.jpg"
+    ]
+  },
+  {
     "id": 1784707664360,
     "marca": "volksvagen",
     "modello": "Golf 1.4 DsG solo 13.000 km",
