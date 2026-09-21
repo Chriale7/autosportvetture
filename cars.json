@@ -151,5 +151,32 @@
       "images/auto/porsche-cayman-gt4-1786780928536-10.jpg",
       "images/auto/porsche-cayman-gt4-1786780931068-11.jpg"
     ]
+  },
+  {
+    "id": 1789987010935,
+    "marca": "volkswagen",
+    "modello": "Polo",
+    "tipo": "citycar",
+    "anno": 2018,
+    "km": 49000,
+    "carburante": "diesel",
+    "prezzo": 12990,
+    "cv": 80,
+    "cambio": "Manuale",
+    "posti": 5,
+    "garantita": true,
+    "descrizione": "VOLKSWAGEN POLO 1.6 TDI COMFORTLINE\n\n✅ Unico proprietario\n✅ 49.000 km\n✅ Tagliandi documentati\n✅ Garanzia di 12 mesi\n✅ Nessun obbligo finanziario\n\n\n• Cambio manuale • Climatizzatore • Cruise Control • Bluetooth • USB • Comandi vocali • Comandi al volante • Vetri elettrici • Specchi retrovisori regolabili elettricamente • Sistema ISOFIX • Cerchi in lega\n\nPREZZO: 12.990 €\n(Prezzo REALE e trasparente, NON vincolato a finanziamenti)\n\nVisionabile esclusivamente su appuntamento presso le nostre sedi di Robbiate o Olgiate Molgora.\n\nPossibilità di finanziamento personalizzato anche senza anticipo\nValutiamo eventuali permute\nPassaggio di proprietà escluso e a carico dell'acquirente.",
+    "images": [
+      "images/auto/volkswagen-polo-1789986979314-0.jpg",
+      "images/auto/volkswagen-polo-1789986982186-1.jpg",
+      "images/auto/volkswagen-polo-1789986985456-2.jpg",
+      "images/auto/volkswagen-polo-1789986988735-3.jpg",
+      "images/auto/volkswagen-polo-1789986992113-4.jpg",
+      "images/auto/volkswagen-polo-1789986995077-5.jpg",
+      "images/auto/volkswagen-polo-1789986997852-6.jpg",
+      "images/auto/volkswagen-polo-1789987000653-7.jpg",
+      "images/auto/volkswagen-polo-1789987004667-8.jpg",
+      "images/auto/volkswagen-polo-1789987007607-9.jpg"
+    ]
   }
 ]
