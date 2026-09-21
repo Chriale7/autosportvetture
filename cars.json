@@ -44,16 +44,44 @@
     "garantita": true,
     "descrizione": "VOLKSWAGEN POLO 1.6 TDI COMFORTLINE\n\n✅ Unico proprietario\n✅ 49.000 km\n✅ Tagliandi documentati\n✅ Garanzia di 12 mesi\n✅ Nessun obbligo finanziario\n\n\n• Cambio manuale • Climatizzatore • Cruise Control • Bluetooth • USB • Comandi vocali • Comandi al volante • Vetri elettrici • Specchi retrovisori regolabili elettricamente • Sistema ISOFIX • Cerchi in lega\n\nPREZZO: 12.990 €\n(Prezzo REALE e trasparente, NON vincolato a finanziamenti)\n\nVisionabile esclusivamente su appuntamento presso le nostra sede.\n\nPossibilità di finanziamento personalizzato anche senza anticipo\nValutiamo eventuali permute\nPassaggio di proprietà escluso e a carico dell'acquirente.",
     "images": [
-      "images/auto/volkswagen-polo-1789986979314-0.jpg",
-      "images/auto/volkswagen-polo-1789986982186-1.jpg",
-      "images/auto/volkswagen-polo-1789986985456-2.jpg",
-      "images/auto/volkswagen-polo-1789986988735-3.jpg",
+      "images/auto/volkswagen-polo-1789988279385-0.jpg",
+      "images/auto/volkswagen-polo-1789988506870-0.jpg",
+      "images/auto/volkswagen-polo-1789988510363-1.jpg",
+      "images/auto/volkswagen-polo-1789988513300-2.jpg",
       "images/auto/volkswagen-polo-1789986992113-4.jpg",
       "images/auto/volkswagen-polo-1789986995077-5.jpg",
       "images/auto/volkswagen-polo-1789986997852-6.jpg",
       "images/auto/volkswagen-polo-1789987000653-7.jpg",
       "images/auto/volkswagen-polo-1789987004667-8.jpg",
       "images/auto/volkswagen-polo-1789987007607-9.jpg"
+    ]
+  },
+  {
+    "id": 1789988261201,
+    "marca": "citroen",
+    "modello": "C3 Cabrio",
+    "tipo": "citycar",
+    "anno": 2010,
+    "km": 130000,
+    "carburante": "benzina",
+    "prezzo": 3990,
+    "cv": 73,
+    "cambio": "Manuale",
+    "posti": 5,
+    "garantita": true,
+    "descrizione": "CITROËN C3 PLURIEL 1.4 BENZINA\n\n✅ Unico proprietario\n✅ 130.000 km\n✅ Garanzia di 12 mesi\n✅ Nessun obbligo finanziario\n\nDOTAZIONI PRINCIPALI:\n•Cabrio • Cambio manuale • Climatizzatore • Vetri elettrici • Specchi retrovisori regolabili elettricamente • Sistema ISOFIX • Cerchi in lega\nPREZZO: 3.990 €\n\n(Prezzo REALE e trasparente, NON vincolato a finanziamenti)\nVisionabile esclusivamente su appuntamento presso la nostra sede\nPossibilità di finanziamento personalizzato anche senza anticipo\nValutiamo eventuali permute\nPassaggio di proprietà escluso e a carico dell'acquirente.",
+    "images": [
+      "images/auto/citroen-c3-cabrio-1789988087749-0.jpg",
+      "images/auto/citroen-c3-cabrio-1789988089894-1.jpg",
+      "images/auto/citroen-c3-cabrio-1789988091936-2.jpg",
+      "images/auto/citroen-c3-cabrio-1789988093888-3.jpg",
+      "images/auto/citroen-c3-cabrio-1789988096259-4.jpg",
+      "images/auto/citroen-c3-cabrio-1789988098112-5.jpg",
+      "images/auto/citroen-c3-cabrio-1789988100424-6.jpg",
+      "images/auto/citroen-c3-cabrio-1789988103284-7.jpg",
+      "images/auto/citroen-c3-cabrio-1789988105600-8.jpg",
+      "images/auto/citroen-c3-cabrio-1789988108151-9.jpg",
+      "images/auto/citroen-c3-cabrio-1789988197835-10.jpg"
     ]
   },
   {
