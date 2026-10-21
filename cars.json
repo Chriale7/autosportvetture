@@ -73,5 +73,29 @@
       "images/g-17.jpg",
       "images/g-18.jpg"
     ]
+  },
+  {
+    "id": 1792621861486,
+    "marca": "audi",
+    "modello": "S1",
+    "tipo": "sportiva",
+    "anno": 2015,
+    "km": 85300,
+    "carburante": "benzina",
+    "prezzo": 22900,
+    "cv": 231,
+    "cambio": "Manuale",
+    "posti": 5,
+    "garantita": true,
+    "descrizione": "AUDI S1 2.0 TFSI QUATTRO, 85.300 km \n\nSportiva compatta da 231 CV, con motore 2.0 TFSI e trazione integrale quattro.\n\nPREZZO: 22.900 €\n\nPrezzo REALE e trasparente, NON vincolato a finanziamenti\n\n\n\n- Tetto apribile\n\n- Impianto audio BOSE\n\n- Tagliandi ufficiali AUDI\n\n- Trazione integrale quattro\n\n\n\nPREZZO TRASPARENTE\n\nNessun obbligo di finanziamento\n\nPossibilità di finanziamento personalizzato (anche senza anticipo)\n\nValutiamo eventuali permute\n\n\n\nVisibile **SOLO SU APPUNTAMENTO** presso le nostre sedi.\n\n\n\nPER RIMANERE AGGIORNATO SULLE NOSTRE VETTURE SEGUICI SU INSTAGRAM: @autosport.vetture\n\n\n\nPassaggio di proprietà escluso e a carico dell'acquirente.",
+    "images": [
+      "images/auto/audi-s1-1792621643918-0.jpg",
+      "images/auto/audi-s1-1792621647042-1.jpg",
+      "images/auto/audi-s1-1792621649915-2.jpg",
+      "images/auto/audi-s1-1792621652212-3.jpg",
+      "images/auto/audi-s1-1792621654594-4.jpg",
+      "images/auto/audi-s1-1792621656771-5.jpg",
+      "images/auto/audi-s1-1792621659313-6.jpg"
+    ]
   }
 ]
