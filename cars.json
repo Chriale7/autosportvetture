@@ -115,5 +115,29 @@
     "images": [
       "images/auto/audi-tt-20-years-1792666941289-0.jpg"
     ]
+  },
+  {
+    "id": 1792682356074,
+    "marca": "fiat",
+    "modello": "PANDA 4X4",
+    "tipo": "citycar",
+    "anno": 2008,
+    "km": 131000,
+    "carburante": "diesel",
+    "prezzo": 4990,
+    "cv": 69,
+    "cambio": "Manuale",
+    "posti": 5,
+    "garantita": true,
+    "descrizione": "Fiat Panda 4x4 1.3 Multijet, immatricolata nel 2008, con motore diesel e trazione integrale 4x4.\n\n131.000 KM\n\nUna vettura compatta, pratica e versatile, ideale per chi cerca un'auto affidabile e funzionale anche su strade di montagna, fondi sconnessi o in condizioni di scarsa aderenza. La trazione integrale 4x4, abbinata ai consumi contenuti del motore Multijet, rende questa Panda una soluzione particolarmente apprezzata per l'utilizzo quotidiano e per chi ha bisogno di affrontare percorsi impegnativi.\n\n- Motore 1.3 Multijet diesel\n- Trazione integrale 4x4\n- 131.000 km\n- Dimensioni compatte e grande praticità\n- Ideale per montagna, campagna e percorsi con scarsa aderenza\n- Consumi contenuti e costi di gestione generalmente accessibili\n\n✅ **PREZZO TRASPARENTE**\n\n✅ Nessun obbligo di finanziamento\n\n✅ Possibilità di finanziamento personalizzato, anche senza anticipo\n\n✅ Valutiamo eventuali permute\n\n📍 Vettura visibile **SOLO SU APPUNTAMENTO** presso le nostre sedi/esposizione di Carvico o Robbiate.\n\n*Passaggio di proprietà escluso e a carico dell'acquirente.\n\nPER RIMANERE AGGIORNATO SULLE NOSTRE VETTURE SEGUICI SU INSTAGRAM: @autosport.vetture\n\nAggiungi una sezione sui punti di forzaRendi il testo più professionale e incisivo",
+    "images": [
+      "images/auto/fiat-panda-4x4-1792681932437-0.jpg",
+      "images/auto/fiat-panda-4x4-1792681938107-1.jpg",
+      "images/auto/fiat-panda-4x4-1792681942352-2.jpg",
+      "images/auto/fiat-panda-4x4-1792682224000-3.jpg",
+      "images/auto/fiat-panda-4x4-1792682227911-4.jpg",
+      "images/auto/fiat-panda-4x4-1792682230630-5.jpg",
+      "images/auto/fiat-panda-4x4-1792682237873-6.jpg"
+    ]
   }
 ]
