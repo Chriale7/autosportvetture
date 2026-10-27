@@ -139,5 +139,35 @@
       "images/auto/fiat-panda-4x4-1792682230630-5.jpg",
       "images/auto/fiat-panda-4x4-1792682237873-6.jpg"
     ]
+  },
+  {
+    "id": 1793098801369,
+    "marca": "opel",
+    "modello": "CORSA 1.2cc 101cv",
+    "tipo": "citycar",
+    "anno": 2020,
+    "km": 68000,
+    "carburante": "benzina",
+    "prezzo": 9990,
+    "cv": 101,
+    "cambio": "Manuale",
+    "posti": 5,
+    "garantita": true,
+    "descrizione": "Opel Corsa da 100 CV, UNICO PROPRIETARIO, con manutenzione sempre eseguita presso la rete ufficiale Opel.\n\n**PREZZO: 9.990 €**\n\nPrezzo REALE e trasparente, NON vincolato a finanziamenti\n\n- Unico proprietario\n- Tagliandi ufficiali OPEL\n- Telecamera posteriore\n- Sensori di parcheggio\n- Frenata automatica assistita\n- Carrozzeria bicolore\n\nPREZZO TRASPARENTE\n\nNessun obbligo di finanziamento\n\nPossibilità di finanziamento personalizzato (anche senza anticipo)\n\nValutiamo eventuali permute\n\nVisibile **SOLO SU APPUNTAMENTO** presso le nostre sedi.\n\nPER RIMANERE AGGIORNATO SULLE NOSTRE VETTURE SEGUICI SU INSTAGRAM: @autosport.vetture\n\nPassaggio di proprietà escluso e a carico dell'acquirente.",
+    "images": [
+      "images/auto/opel-corsa-1-2cc-101cv-1793098718947-0.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098784006-0.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098722882-1.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098726917-2.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098731233-3.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098735275-4.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098739489-5.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098743543-6.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098746779-7.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098749124-8.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098754758-10.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098757897-11.jpg",
+      "images/auto/opel-corsa-1-2cc-101cv-1793098751935-9.jpg"
+    ]
   }
 ]
